@@ -79,17 +79,8 @@ class Sprite extends Component{
 	}
 }
 
-
-let player= new Entity("Player");
-for(let i = 0;i<100;i++){
-	let t = new Entity("Generic Tile");
-	ComponentFactory.createComponent("Sprite",t.id,"TileSprite");
-	ComponentFactory.createComponent("Position",t.id,i%5,(i%5)+i);
-}
-ComponentFactory.createComponent("Sprite",player.id,"SpriteFile");
-
-
-
 class System{
 	constructor(){}
 }
+
+export{Entity, ComponentFactory}
