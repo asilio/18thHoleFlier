@@ -83,4 +83,4 @@ class System{
 	constructor(){}
 }
 
-export{Entity, ComponentFactory}
+export{Entity, ComponentFactory, Sprite, Position}

@@ -1,4 +1,4 @@
-import {Entity, ComponentFactory} from "./modules/framework.js";
+import {Entity,Sprite, Position, ComponentFactory} from "./modules/framework.js";
 
 const context = document.getElementById("canvas").getContext('2d');
 
