@@ -52,7 +52,7 @@ function main(){
 	for(let id in Sprite.Sprites){
 		Sprite.Sprites[id].update(context,id);
 	}
-	Sprite.Sprites(player.id).update(context,id);
+	Sprite.Sprites[player.id].update(context,id);
 	requestAnimationFrame(main);
 
 
