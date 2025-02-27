@@ -10,7 +10,7 @@ class Entity{
 
 class ComponentFactory{
 	static createComponent(type,eid){
-		args=Array.from(arguments).slice(2);
+		let args=Array.from(arguments).slice(2);
 		type = type.toLowerCase();
 		switch(type){
 			case 'position':
