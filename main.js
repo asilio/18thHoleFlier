@@ -23,14 +23,31 @@ for(let i = 0;i<WIDTH*HEIGHT;i++){
 	ComponentFactory.createComponent("Position",t.id,TILE_SIZE*(i%WIDTH),TILE_SIZE*Math.floor(i/WIDTH));
 }
 ComponentFactory.createComponent("Sprite",player.id,"./Assets/player.png");
-ComponentFactory.createComponent("Position",player.id,50,50);
+ComponentFactory.createComponent("Position",player.id,64,64);
+const p = Position.Positions[player.id];
+//*** Keyboard Listener ***//
+document.addEventListener(
+	'keyup',
+	(event)=>{
+		const keyName = event.key;
+		switch(keyName){
+			case 'a':
+				p.x-=TILE_SIZE;
+				break;
+			case 'd':
+				p.x+=TILE_SIZE;
+			case 's':
+				p.y+=TILE_SIZE;
+			case 'w':
+				p.y-=TILE_SIZE;
+		}
+	}
+	)
 
 let count =0;
 function main(){
 	count++;
 	context.clearRect(0,0,context.canvas.width,context.canvas.height);
-
-	let p = Position.Positions[player.id];
 	p.x+=Math.sin(Date.now()/1000)
 	for(let id in Sprite.Sprites){
 		Sprite.Sprites[id].update(context,id);
