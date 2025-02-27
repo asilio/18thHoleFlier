@@ -75,7 +75,7 @@ class Sprite extends Component{
 	}
 
 	update(context){
-		draw(context);
+		this.draw(context);
 	}
 }
 
