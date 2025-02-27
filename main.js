@@ -36,10 +36,13 @@ document.addEventListener(
 				break;
 			case 'd':
 				p.x+=TILE_SIZE;
+				break;
 			case 's':
 				p.y+=TILE_SIZE;
+				break;
 			case 'w':
 				p.y-=TILE_SIZE;
+				break;
 		}
 	}
 	)
