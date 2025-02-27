@@ -21,6 +21,7 @@ function main(){
 	}
 	if(count<10000)
 		requestAnimationFrame(main);
+	context.clearRect(0,0,context.canvas.width,context.canvas.height)
 
 }
 
