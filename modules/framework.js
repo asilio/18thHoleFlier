@@ -1,16 +1,94 @@
 class Entity{
 	static ID_COUNTER = -1;
-	constructor(){
-		this.id = Entity.ID_COUNTER++;
+	static Entities=[];
+	constructor(name=""){
+		this.id = ++Entity.ID_COUNTER;
+		this.name = name;
+		Entity.Entities[this.id] = this;
+	}
+}
+
+class ComponentFactory{
+	static createComponent(type,eid){
+		args=Array.from(arguments).slice(2);
+		type = type.toLowerCase();
+		switch(type){
+			case 'position':
+				if(Position.Positions[eid]==undefined){
+					let p = new Position(...args);
+					Position.Positions[eid] = p;
+				}
+				return Position.Positions[eid];
+			case 'sprite':
+				if(Sprite.Sprites[eid]==undefined){
+					let s = new Sprite(...args);
+					Sprite.Sprites[eid] = s;
+				}
+				return Sprite.Sprites[eid];
+		}
+
 	}
 }
 
 class Component{
+	static ID_COUNTER = -1;
 	constructor(){
+		this.id = ++Component.ID_COUNTER;
+	}
+	update(){ throw new Error("Update Not Implemented in Derived Class");}
+}
+
+class Position extends Component{
+	static Positions = {};
+	static remove(eid){
+		delete Position.Positions[eid];
+	}
+	constructor(x,y,eid){
+			super();
+			this.x = x;
+			this.y = y;
+	}
+	update(){}
+	
+}
+
+class Sprite extends Component{
+	static Sprites = {};
+	static remove(eid){
+		delete Sprite.Sprites[eid];
+	}
+	constructor(sprite,eid){
+		super();
+		this.sprite = new Image();
+		this.sprite.src = sprite;
+		this.entity = eid;
+		this.ready = false;
+		this.sprite.addEventListener("load",this.setReady);
 	}
 
-	update(){}
+	setRead(){
+		this.ready = true;
+	}
+
+	draw(context){
+		if(!this.ready) return;
+	}
+
+	update(context){
+		draw(context);
+	}
 }
+
+
+let player= new Entity("Player");
+for(let i = 0;i<100;i++){
+	let t = new Entity("Generic Tile");
+	ComponentFactory.createComponent("Sprite",t.id,"TileSprite");
+	ComponentFactory.createComponent("Position",t.id,i%5,(i%5)+i);
+}
+ComponentFactory.createComponent("Sprite",player.id,"SpriteFile");
+
+
 
 class System{
 	constructor(){}
