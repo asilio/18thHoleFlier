@@ -13,7 +13,6 @@ ComponentFactory.createComponent("Position",player.id,50,50);
 
 
 function main(){
-	console.log("Main...");
 	for(let id in Sprite.Sprites){
 		Sprite.Sprites[id].update(context);
 	}
