@@ -66,7 +66,7 @@ class Sprite extends Component{
 		this.sprite.addEventListener("load",this.setReady);
 	}
 
-	setRead(){
+	setReady(){
 		console.log(this);
 		this.ready = true;
 	}
