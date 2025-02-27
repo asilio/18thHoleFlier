@@ -20,7 +20,7 @@ let player= new Entity("Player");
 for(let i = 0;i<WIDTH*HEIGHT;i++){
 	let t = new Entity("Generic Tile");
 	ComponentFactory.createComponent("Sprite",t.id,"./Assets/tile.png");
-	ComponentFactory.createComponent("Position",t.id,TILE_SIZE*(i%WIDTH),TILE_SIZE*Math.floor(i/5));
+	ComponentFactory.createComponent("Position",t.id,TILE_SIZE*(i%WIDTH),TILE_SIZE*Math.floor(i/WIDTH));
 }
 ComponentFactory.createComponent("Sprite",player.id,"./Assets/player.png");
 ComponentFactory.createComponent("Position",player.id,50,50);
@@ -35,7 +35,7 @@ function main(){
 	for(let id in Sprite.Sprites){
 		Sprite.Sprites[id].update(context,id);
 	}
-	
+	Sprite.Sprites(player.id).update(context,id);
 	requestAnimationFrame(main);
 
 
