@@ -19,9 +19,9 @@ function main(){
 	for(let id in Sprite.Sprites){
 		Sprite.Sprites[id].update(context,id);
 	}
-	if(count<10000)
-		requestAnimationFrame(main);
 	context.clearRect(0,0,context.canvas.width,context.canvas.height)
+	requestAnimationFrame(main);
+
 
 }
 
