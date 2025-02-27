@@ -63,10 +63,11 @@ class Sprite extends Component{
 		this.sprite.src = sprite;
 		this.entity = eid;
 		this.ready = false;
-		this.sprite.addEventListener("load",this.setReady.bind(this));
+		this.sprite.addEventListener("load",this.setReady);
 	}
 
 	setRead(){
+		console.log(this);
 		this.ready = true;
 	}
 
