@@ -14,6 +14,8 @@ ComponentFactory.createComponent("Position",player.id,50,50);
 let count =0;
 function main(){
 	count++;
+	let p = Position.Positions[player.id];
+	p.x+=Math.sin(Date.now()/1000)
 	for(let id in Sprite.Sprites){
 		Sprite.Sprites[id].update(context,id);
 	}
