@@ -48,7 +48,6 @@ let count =0;
 function main(){
 	count++;
 	context.clearRect(0,0,context.canvas.width,context.canvas.height);
-	p.x+=Math.sin(Date.now()/1000)
 	for(let id in Sprite.Sprites){
 		Sprite.Sprites[id].update(context,id);
 	}
