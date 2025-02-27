@@ -72,14 +72,14 @@ class Sprite extends Component{
 	draw(context,eid){
 		if(!this.ready) return;
 		let p = Position.Positions[eid];
-		console.log(p);
+		//console.log(p);
 		if(p==undefined) return;
 	
 		context.drawImage(this.sprite,p.x,p.y);
 	}
 
 	update(context,eid){
-		this.draw(context);
+		this.draw(context,eid);
 	}
 }
 
