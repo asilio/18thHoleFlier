@@ -3,7 +3,7 @@ import {Entity,Sprite, Position, ComponentFactory} from "./modules/framework.js"
 const context = document.getElementById("canvas").getContext('2d');
 
 let player= new Entity("Player");
-for(let i = 0;i<100;i++){
+for(let i = 0;i<10;i++){
 	let t = new Entity("Generic Tile");
 	ComponentFactory.createComponent("Sprite",t.id,"./Assets/tile.png");
 	ComponentFactory.createComponent("Position",t.id,i%5,(i%5)+i);
