@@ -57,11 +57,10 @@ class Sprite extends Component{
 	static remove(eid){
 		delete Sprite.Sprites[eid];
 	}
-	constructor(sprite,eid){
+	constructor(sprite){
 		super();
 		this.sprite = new Image();
 		this.sprite.src = sprite;
-		this.entity = eid;
 		this.ready = false;
 		this.sprite.addEventListener("load",this.setReady.bind(this));
 	}
@@ -70,18 +69,15 @@ class Sprite extends Component{
 		this.ready = true;
 	}
 
-	draw(context){
+	draw(context,eid){
 		if(!this.ready) return;
-		console.log(this);
-		let p = Position.Positions[this.entity];
-		console.log(p);
-
+		let p = Position.Positions[eid];
 		if(p==undefined) return;
-		
+	
 		context.drawImage(this.sprite,p.x,p.y);
 	}
 
-	update(context){
+	update(context,eid){
 		this.draw(context);
 	}
 }

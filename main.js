@@ -15,7 +15,7 @@ let count =0;
 function main(){
 	count++;
 	for(let id in Sprite.Sprites){
-		Sprite.Sprites[id].update(context);
+		Sprite.Sprites[id].update(context,id);
 	}
 	if(count<10000)
 		requestAnimationFrame(main);
