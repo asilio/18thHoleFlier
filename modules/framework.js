@@ -110,6 +110,7 @@ class Layer extends Component{
 	}
 
 	render(){
+		this.context.clearRect(0,0,this.context.canvas.width,this.context.canvas.height);
 		for(let eid in Layer.Layers[this.layer]){
 			if(eid in Sprite.Sprites){
 				Sprite.Sprites[eid].draw(this.context,eid);
@@ -118,6 +119,7 @@ class Layer extends Component{
 	}
 
 	update(context){
+
 		context.drawImage(this.canvas,0,0);
 	}
 }
