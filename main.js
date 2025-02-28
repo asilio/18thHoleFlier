@@ -292,7 +292,11 @@ function update(time_slice){
 		switch(s){
 			case 'OOB':
 			case 'tree':
-				[playerp.x, playerp.y] = canvas_pixel_to_tile_corner(playerp.x, playerp.y);
+				while('tree' == checkTile(playerp.x, playerp.y)){
+					playerp.x-=TILE_SIZE;
+					[playerp.x, playerp.y] = canvas_pixel_to_tile_corner(playerp.x, playerp.y);
+				}
+				
 				console.log(x,y, playerp.x,playerp.y);
 				M = N+1
 			break;
