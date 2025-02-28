@@ -294,8 +294,9 @@ function update(time_slice){
 		N = 0;
 		distance = 0;
 	}
-
-	switch(checkTile(playerp.x+TILE_SIZE/2, playerp.y+TILE_SIZE/2)){
+	let s = checkTile(playerp.x+TILE_SIZE/2, playerp.y+TILE_SIZE/2);
+	console.log(`Ball is over: ${s}`);
+	switch(s){
 		case 'OOB':
 		case 'tree':
 			playerp.x = lastx;
