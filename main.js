@@ -118,6 +118,7 @@ function makeArc(x1,y1,x2,y2,d,dt=0.01){
 	let tf = Math.atan2(cy-y2,cx-x2);
 	//DEBUG
 	console.log(`t1: ${t1}, \nt2: ${t2}`);
+	console.log(`dx: ${d*Math.cos(t2)}\ndy:${d*Math.sin(t2)}`);
 	let cp = Position.Positions[center.id];
 	let mp = Position.Positions[midpoint.id]
 	mp.x = (x1+x2)/2;
