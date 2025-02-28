@@ -21,7 +21,11 @@ function canvas_pixel_to_tile_corner(cx,cy){
 
 let player= new Entity("Player");
 let layers = [];
-
+let asset_map={
+	"./Assets/fair.png":"fair",
+	"./Assets/rough.png":"rough",
+	"./Assets/tree.png":"tree"
+}
 for(let i = 0;i<WIDTH*HEIGHT;i++){
 	let t = new Entity("Generic Tile");
 	if(Math.random()<0.5)
@@ -254,8 +258,21 @@ let dt = 0;
 let sx = 0;
 let sy = 0;
 
+function checkTile(x,y){
+	for(let eid in Layer.Layers[0]){
+		if(eid in Sprite.Sprites){
+			if(Sprite.Sprites[eid].isInSprite(x,y,eid)){
+				return asset_map[Sprite.Sprites[eid].sprite.src];
+			}
+		}
+	}
+	return "OOB"
+}
+
 function update(time_slice){
 	//console.log(distance, N, M, travel_time,dt);
+	let lastx = playerp.x;
+	let lasty = playerp.y;
 	if(distance > 0 && travel_time == 0 && N==0){
 		travel_time = 1000*distance/players;
 		N = Math.floor(travel_time/time_slice);
@@ -276,6 +293,19 @@ function update(time_slice){
 		M = 0;
 		N = 0;
 		distance = 0;
+	}
+
+	switch(checkTile(playerp.x+TILE_SIZE/2, playerp.y+TILE_SIZE/2)){
+		case 'OOB':
+		case 'tree':
+			playerp.x = lastx;
+			playerp.y = lasty;
+			M = N+1
+			break;
+		case 'fair':
+		case 'rough':
+		default:
+			break;
 	}
 
 }

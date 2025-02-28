@@ -203,6 +203,13 @@ class Sprite extends Component{
 	update(context,eid){
 		this.draw(context,eid);
 	}
+
+	isInSprite(x,y,eid){
+		let p = Position.Positions[eid];
+		let sw = this.defaultSprite.width;
+		let sh = this.defaultSprite.height;
+		return (x> p.x && x< p.x+sw) && (y>p.y && y<p.y+sh);
+	}
 }
 
 class Layer extends Component{
