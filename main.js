@@ -103,6 +103,7 @@ function makeArc(x1,y1,x2,y2,d,dt=0.01){
 	let r  = Math.sqrt((cx-x1)*(cx-x1)+(cy-y1)*(cy-y1));
 	let t0 = Math.atan2(cy-y1,cx-x1);
 	let tf = Math.atan2(cy-y2,cx-x2);
+	console.log(`t1: ${t1}, \nt2: ${t2}`);
 	let t = 0;
 	let path = [];
 	while(t<1){
