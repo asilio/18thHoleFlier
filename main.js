@@ -84,6 +84,7 @@ let righty = PositionSelectableLayerFactory(64,0,true,"./Assets/righty-select.pn
 let forehand = PositionSelectableLayerFactory(96,0,false,"./Assets/forehand-select.png","./Assets/forehand.png", 2);
 let backhand = PositionSelectableLayerFactory(96+32,0,true,"./Assets/backhand-select.png","./Assets/backhand.png", 2);
 let distance = 0;
+let distance_to_target;
 
 function checkHandedness(){
 	let ls = Selectable.Selectables[lefty.id];
