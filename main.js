@@ -98,7 +98,9 @@ context.canvas.addEventListener('mouseup',
 
 		let pp = Position.Positions[player.id];
 		let x, y;
-		[x,y,distance]=getArcPosition(pp.x,pp.y,p.x,p.y,32*2,'right',0);
+		let d = Math.floor(pp.distance(p)/TILE_SIZE);
+		center_offset = d*TILE_SIZE;
+		[x,y,distance]=getArcPosition(pp.x,pp.y,p.x,p.y,center_offset,'right',0);
 	});
 
 
@@ -171,6 +173,7 @@ let M = 0;
 let dt = 0;
 let sx = 0;
 let sy = 0;
+let center_offset = 0;
 
 function update(time_slice){
 	//console.log(distance, N, M, travel_time,dt);
@@ -184,7 +187,7 @@ function update(time_slice){
 	}
 	if(M<=N && distance>0){
 		let x, y, d;
-		[x, y, d] = getArcPosition(sx,sy,targetp.x,targetp.y,32*2,'right',M/N);
+		[x, y, d] = getArcPosition(sx,sy,targetp.x,targetp.y,center_offset,'right',M/N);
 		M+=1;
 		playerp.x = x;
 		playerp.y = y;
