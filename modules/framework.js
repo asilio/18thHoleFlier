@@ -36,7 +36,7 @@ class ComponentFactory{
 					let s = new Selectable(...args);
 					Selectable.Selectables[eid] = s;
 				}
-				return Selectable.Selectabls[eid];
+				return Selectable.Selectables[eid];
 
 			case 'layer':
 				let layer = args[0];
