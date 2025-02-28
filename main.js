@@ -60,7 +60,7 @@ document.addEventListener(
 /*** Mouse Events ***/
 let hover = new Entity();
 ComponentFactory.createComponent("Sprite",hover.id,"./Assets/hoverbox.png");
-ComponentFactory.createComponent("Position",hover.id,-100,0);
+ComponentFactory.createComponent("Position",hover.id,0,0);
 ComponentFactory.createComponent("Layer",hover.id,1,context.canvas.width,context.canvas.height);
 
 let target = new Entity();
@@ -111,7 +111,8 @@ function makeArc(x1,y1,x2,y2,d,dt=0.01){
 			cy-r*Math.sin(t0+t*(t1-t0)) 
 			]);
 		t+=dt;
-	}	
+	}
+	path.push([x2,y2]);
 	return path;
 }
 /*** Main Loop ***/
@@ -126,9 +127,6 @@ function main(){
 	}
 	else{
 		let targetp = Position.Positions[target.id];
-		p.x = targetp.x;
-		p.y = targetp.y;
-		
 		targetp.x =- 100;
 	}
 	layers[1].render();
