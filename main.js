@@ -118,16 +118,19 @@ function makeArc(x1,y1,x2,y2,d,hyzer='left',dt=0.01,){
 	let t0 = Math.atan2(cy-y1,cx-x1);
 	let tf = Math.atan2(cy-y2,cx-x2);
 	//DEBUG
-	console.log(`t1: ${t1}, \nt2: ${t2}`);
-	console.log(`dx: ${d*Math.cos(t1)}\ndy:${d*Math.sin(t1)}`);
-	console.log(`t0: ${t0},\ntf: ${tf}\n|t0-tf|${Math.abs(t0-tf)}`);
-	if(Math.abs(t0-tf)>Math.PI) tf+=2*Math.PI;
+	//console.log(`t1: ${t1}, \nt2: ${t2}`);
+	//console.log(`dx: ${d*Math.cos(t1)}\ndy:${d*Math.sin(t1)}`);
+	//console.log(`t0: ${t0},\ntf: ${tf}\n|t0-tf|${Math.abs(t0-tf)}`);
+	
+	if(Math.abs(t0-tf)>Math.PI && tf<0) tf+=2*Math.PI;
+	if(Math.abs(t0-tf)>Math.PI && tf>0) tf-=2*Math.PI;
 	let cp = Position.Positions[center.id];
 	let mp = Position.Positions[midpoint.id]
 	mp.x = (x1+x2)/2;
 	mp.y = (y1+y2)/2;
 	cp.x = cx;
 	cp.y = cy;
+
 	//Path
 	let t = 0;
 	let path = [];
