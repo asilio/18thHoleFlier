@@ -170,14 +170,14 @@ let N = 0;
 let M = 0;
 let dt = 0;
 function update(time_slice){
-	console.log(M, N);
+	console.log(distance, N, M, travel_time,dt);
 	if(distance > 0 && travel_time == 0 && N==0){
 		travel_time = 1000*distance/players;
 		N = Math.floor(travel_time/time_slice);
 		dt = 1/N;
 		M = 0;
 	}
-	if(M<N){
+	if(M<N && distance>0){
 		let x, y, d;
 		[x, y, d] = getArcPosition(playerp.x,playerp.y,targetp.x,targetp.y,32*2,'right',M/N);
 		M+=1;
