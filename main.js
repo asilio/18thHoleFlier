@@ -284,24 +284,15 @@ function update(time_slice){
 		sy = playerp.y;
 	}
 	if(M<=N && distance>0){
-		let x, y, d, dx, dy;
+		let x, y, d;
 		[x, y, d] = getArcPosition(sx,sy,targetp.x,targetp.y,checkForeHand(),checkHandedness(),M/N);
 		M+=1;
-		dx = x - playerp.x;
-		dy = y - playerp.dy;
-
 		let s = checkTile(x, y);
 		console.log(s);
 		switch(s){
 			case 'OOB':
 			case 'tree':
-				dx= lastx-playerp.x;
-				dy = lasty-playerp.y;
-				d = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
-				dx = dx/d*32;
-				dy = dy/d*32;
-
-				[playerp.x, playerp.y] = canvas_pixel_to_tile_corner(lastx+dx,lasty+dy);
+				[playerp.x, playerp.y] = canvas_pixel_to_tile_corner(playerp.x, playerp.y);
 				console.log(x,y, playerp.x,playerp.y);
 				M = N+1
 			break;
