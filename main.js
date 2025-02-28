@@ -147,6 +147,7 @@ context.canvas.addEventListener('mouseup',
 		let pp = Position.Positions[player.id];
 		let x, y;
 		distance_to_target = Math.floor(pp.distance(p)/TILE_SIZE);
+		console.log(checkForeHand(),checkHandedness());
 		[x,y,distance]=getArcPosition(pp.x,pp.y,p.x,p.y,checkForeHand(),checkHandedness(),0);
 	});
 
