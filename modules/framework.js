@@ -36,7 +36,7 @@ class ComponentFactory{
 					Layer.Layers[layer][eid]=l;	
 				}
 				
-				return Layer.Layers[l.layer][eid];
+				return Layer.Layers[layer][eid];
 		}
 
 	}
