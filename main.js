@@ -7,7 +7,7 @@ const WIDTH = 10;
 const HEIGHT = 10;
 
 function pixel_to_tile(px,py){
-	return [px%TILE_SIZE, py%TILE_SIZE];
+	return [px%TILE_SIZE+Math.floor(px/TILE_SIZE), py%TILE_SIZE+Math.floor(py/TILE_SIZE)];
 }
 
 function tile_to_pixel(tx,ty){
@@ -15,7 +15,7 @@ function tile_to_pixel(tx,ty){
 }
 
 function canvas_pixel_to_tile_corner(cx,cy){
-	return [(cx%TILE_SIZE)*TILE_SIZE,(cy%TILE_SIZE)*TILE_SIZE];
+	return [(cx%TILE_SIZE+Math.floor(cx/TILE_SIZE))*TILE_SIZE,(cy%TILE_SIZE+Math.floor(cy/TILE_SIZE))*TILE_SIZE];
 }
 
 
