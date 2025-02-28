@@ -58,8 +58,9 @@ function main(){
 
 	layers[1].render();
 
-	layers[0].update(context);
+	
 	layers[1].update(context);
+	layers[0].update(context);
 	requestAnimationFrame(main);
 }
 
