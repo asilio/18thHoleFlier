@@ -295,6 +295,7 @@ function update(time_slice){
 				while('tree' == checkTile(playerp.x, playerp.y)){
 					playerp.x+=Math.sign(playerp.x-x)*TILE_SIZE;
 					playerp.y+=Math.sign(playerp.y-y)*TILE_SIZE;
+					
 					[playerp.x, playerp.y] = canvas_pixel_to_tile_corner(playerp.x, playerp.y);
 				}
 				
