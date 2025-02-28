@@ -166,7 +166,7 @@ let N = 0;
 let M = 0;
 let dt = 0;
 function update(time_slice){
-	if(distance > 0 && travel_time == 0 && N=0){
+	if(distance > 0 && travel_time == 0 && N==0){
 		travel_time = 1000*distance/players;
 		N = Math.floor(travel_time/time_slice);
 		dt = 1/N;
