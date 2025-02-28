@@ -79,7 +79,7 @@ context.canvas.addEventListener('mousemove',
 		p.x=result[0];
 		p.y=result[1];
 	});
-let playerPath = [];
+const playerPath = [];
 
 context.canvas.addEventListener('mouseup',
 	(event)=>{
@@ -104,13 +104,15 @@ function makeArc(x1,y1,x2,y2,d,dt=0.001){
 	let t0 = Math.atan2(cy-y1,cx-x1);
 	let tf = Math.atan2(cy-y2,cx-x2);
 	let t = 0;
+	let path = [];
 	while(t<1){
-		playerPath.push([
+		path.push([
 			cx-r*Math.cos(t0+t*(t1-t0)),
 			cy-r*Math.sin(t0+t*(t1-t0)) 
 			]);
 		t+=dt;
 	}	
+	return path;
 }
 /*** Main Loop ***/
 layers[0].render();
