@@ -146,7 +146,14 @@ context.canvas.addEventListener('mouseup',
 		let pp = Position.Positions[player.id];
 		let x, y;
 		let d = Math.floor(pp.distance(p)/TILE_SIZE);
-		center_offset = d*TILE_SIZE;
+		let check = checkForeHand();
+		switch(check){
+			case 'backhand':
+				center_offset = 3*TILE_SIZE;
+			default:
+				center_offset = d*TILE_SIZE;		
+		}
+		
 		let string = checkHandedness();
 		[x,y,distance]=getArcPosition(pp.x,pp.y,p.x,p.y,center_offset,string,0);
 	});
