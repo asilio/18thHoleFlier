@@ -96,13 +96,13 @@ context.canvas.addEventListener('mouseup',
 
 
 function makeArc(x1,y1,x2,y2,d,dt=0.001){
-	let t1 = Math.arctan2(y1-y2,x1-x2);
+	let t1 = Math.atan2(y1-y2,x1-x2);
 	let t2 = t1 + Math.PI/2;
 	let cx = (x1+x2)/2+d*Math.cos(t2);
 	let cy = (y1+y2)/2+d*Math.sin(t2);
 	let r  = Math.sqrt((cx-x1)*(cx-x1)+(cy-y1)*(cy-y1));
-	let t0 = Math.arctan2(cy-y1,cx-x1);
-	let tf = Math.arctan2(cy-y2,cx-x2);
+	let t0 = Math.atan2(cy-y1,cx-x1);
+	let tf = Math.atan2(cy-y2,cx-x2);
 	let t = 0;
 	while(t<1){
 		playerPath.push([
