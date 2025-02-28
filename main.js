@@ -50,8 +50,8 @@ document.addEventListener(
 		}
 	}
 	)
-
-Layer.Layers[0][1].render();
+let bglid = Object.keys(Layer.Layers[0])[0];
+Layer.Layers[0][bglid].render();
 Layer.Layers[1][0].render();
 function main(){
 	context.clearRect(0,0,context.canvas.width,context.canvas.height);

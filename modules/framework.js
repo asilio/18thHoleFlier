@@ -118,7 +118,7 @@ class Layer extends Component{
 	}
 
 	update(context){
-		context.drawImage(this.canvas);
+		context.drawImage(this.canvas,0,0);
 	}
 }
 
