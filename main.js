@@ -61,6 +61,7 @@ document.addEventListener(
 let hover = new Entity();
 ComponentFactory.createComponent("Sprite",hover.id,"./Assets/hoverbox.png");
 ComponentFactory.createComponent("Position",hover.id,-100,0);
+ComponentFactory.createComponent("Layer",hover.id,1,context.canvas.width,context.canvas.height);
 
 context.canvas.addEventListener('mousemove',
 	(event)=>{
@@ -70,7 +71,6 @@ context.canvas.addEventListener('mousemove',
 		let p = Position.Positions[hover.id];
 		p.x=result[0];
 		p.y=result[1];
-
 	});
 
 /*** Main Loop ***/
