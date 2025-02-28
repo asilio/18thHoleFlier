@@ -119,7 +119,7 @@ function makeArc(x1,y1,x2,y2,d,dt=0.01){
 	//DEBUG
 	console.log(`t1: ${t1}, \nt2: ${t2}`);
 	console.log(`dx: ${d*Math.cos(t1)}\ndy:${d*Math.sin(t1)}`);
-	console.log(`t0: ${t0},\ntf: ${tf}`);
+	console.log(`t0: ${t0},\ntf: ${tf}\n|t0-tf|${Math.abs(t0-tf)}`);
 	let cp = Position.Positions[center.id];
 	let mp = Position.Positions[midpoint.id]
 	mp.x = (x1+x2)/2;
