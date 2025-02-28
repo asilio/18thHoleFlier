@@ -72,6 +72,10 @@ let center = new Entity();
 ComponentFactory.createComponent("Sprite",center.id,"./Assets/center.png");
 ComponentFactory.createComponent("Position",center.id,-100,0);
 ComponentFactory.createComponent("Layer",center.id,1,context.canvas.width,context.canvas.height);
+let midpoint = new Entity();
+ComponentFactory.createComponent("Sprite",midpoint.id,"./Assets/midpoint.png");
+ComponentFactory.createComponent("Position",midpoint.id,-100,0);
+ComponentFactory.createComponent("Layer",midpoint.id,1,context.canvas.width,context.canvas.height);
 
 context.canvas.addEventListener('mousemove',
 	(event)=>{
@@ -111,8 +115,11 @@ function makeArc(x1,y1,x2,y2,d,dt=0.01){
 	//DEBUG
 	console.log(`t1: ${t1}, \nt2: ${t2}`);
 	let cp = Position.Positions[center.id];
-	cp.x = (x1+x2)/2;
-	cp.y = (y1+y2)/2;
+	let mp = Position.Positions[midpoint.id]
+	mp.x = (x1+x2)/2;
+	mp.y = (y1+y2)/2;
+	cp.x = cx;
+	cp.y = cy;
 	//Path
 	let t = 0;
 	let path = [];
