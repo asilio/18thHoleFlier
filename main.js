@@ -287,7 +287,7 @@ function update(time_slice){
 		let x, y, d;
 		[x, y, d] = getArcPosition(sx,sy,targetp.x,targetp.y,checkForeHand(),checkHandedness(),M/N);
 		M+=1;
-		let s = checkTile(x, y);
+		let s = checkTile(x+TILE_SIZE/2, y+TILE_SIZE/2);
 		console.log(s);
 		switch(s){
 			case 'OOB':
