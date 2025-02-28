@@ -182,7 +182,7 @@ function update(time_slice){
 		sx = playerp.x;
 		sy = playerp.y;
 	}
-	if(M<N && distance>0){
+	if(M<=N && distance>0){
 		let x, y, d;
 		[x, y, d] = getArcPosition(sx,sy,targetp.x,targetp.y,32*2,'right',M/N);
 		M+=1;
