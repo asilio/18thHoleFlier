@@ -284,11 +284,31 @@ function update(time_slice){
 		sy = playerp.y;
 	}
 	if(M<=N && distance>0){
-		let x, y, d;
+		let x, y, d, dx, dy;
 		[x, y, d] = getArcPosition(sx,sy,targetp.x,targetp.y,checkForeHand(),checkHandedness(),M/N);
 		M+=1;
-		playerp.x = x;
-		playerp.y = y;
+		dx = x - playerp.x;
+		dy = y - playerp.dy;
+
+		let s = checkTile(playerp.x+dx, playerp.y+dy);
+		//console.log(s);
+		switch(s){
+			case 'OOB':
+			case 'tree':
+				dx= lastx-playerp.x;
+				dy = lasty-playerp.y;
+				d = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
+				dx = dx/d*32;
+				dy = dy/d*32
+				[playerp.x, playerp.y] = canvas_pixel_to_tile_corner(lastx+dx,lasty+dy);
+				M = N+1
+			break;
+		case 'fair':
+		case 'rough':
+		default:
+			playerp.x = x;
+			playerp.y = y;
+		}
 	}
 	if(M>N){
 		travel_time = 0;
@@ -296,24 +316,7 @@ function update(time_slice){
 		N = 0;
 		distance = 0;
 	}
-	let s = checkTile(playerp.x+TILE_SIZE/2, playerp.y+TILE_SIZE/2);
-	//console.log(s);
-	switch(s){
-		case 'OOB':
-		case 'tree':
-			let dx= lastx-playerp.x;
-			let dy = lasty-playerp.y;
-			let d = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
-			dx = dx/d*32;
-			dy = dy/d*32
-			[playerp.x, playerp.y] = canvas_pixel_to_tile_corner(lastx+dx,lasty+dy);
-			M = N+1
-			break;
-		case 'fair':
-		case 'rough':
-		default:
-			break;
-	}
+	
 
 }
 
