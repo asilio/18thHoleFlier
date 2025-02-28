@@ -57,34 +57,20 @@ document.addEventListener(
 	}
 	);
 
+function PositionSpriteLayerFactory(x,y,sprite,layer){
+	let E = new Entity();
+	ComponentFactory.createComponent("Sprite",E.id,"./Assets/hoverbox.png");
+	ComponentFactory.createComponent("Position",E.id,x,y);
+	let L = ComponentFactory.createComponent("Layer",E.id,layer,context.canvas.width,context.canvas.height);
+	layers[L.layer]=L;
+}
+let hover = PositionSpriteLayerFactory(-100,0,"./Assets/hoverbox.png", 1);
+let target = PositionSpriteLayerFactory(-100,0,"./Assets/target.png", 1);
+let center = PositionSpriteLayerFactory(-100,0,"./Assets/center.png", 1);
+let midpoint = PositionSpriteLayerFactory(-100,0,"./Assets/midpoint.png", 1);
+let lefty = PositionSpriteLayerFactory(32,0,"./Assets/lefty.png", 2);
+console.log(layers);
 /*** Mouse Events ***/
-let hover = new Entity();
-ComponentFactory.createComponent("Sprite",hover.id,"./Assets/hoverbox.png");
-ComponentFactory.createComponent("Position",hover.id,-100,0);
-ComponentFactory.createComponent("Layer",hover.id,1,context.canvas.width,context.canvas.height);
-
-let target = new Entity();
-ComponentFactory.createComponent("Sprite",target.id,"./Assets/target.png");
-ComponentFactory.createComponent("Position",target.id,-100,0);
-ComponentFactory.createComponent("Layer",target.id,1,context.canvas.width,context.canvas.height);
-
-let center = new Entity();
-ComponentFactory.createComponent("Sprite",center.id,"./Assets/center.png");
-ComponentFactory.createComponent("Position",center.id,-100,0);
-ComponentFactory.createComponent("Layer",center.id,1,context.canvas.width,context.canvas.height);
-
-let midpoint = new Entity();
-ComponentFactory.createComponent("Sprite",midpoint.id,"./Assets/midpoint.png");
-ComponentFactory.createComponent("Position",midpoint.id,-100,0);
-ComponentFactory.createComponent("Layer",midpoint.id,1,context.canvas.width,context.canvas.height);
-
-//let debug_line = new Line(0,0,10,10,player.id);
-
-let lefty = new Entity();
-ComponentFactory.createComponent("Sprite",lefty.id,"./Assets/lefty.png");
-ComponentFactory.createComponent("Position",lefty.id,32,0);
-layers[2] = ComponentFactory.createComponent("Layer",lefty.id,2,context.canvas.width,context.canvas.height);
-
 context.canvas.addEventListener('mousemove',
 	(event)=>{
 		let cx = event.offsetX;
@@ -95,9 +81,6 @@ context.canvas.addEventListener('mousemove',
 		let p = Position.Positions[hover.id];
 		p.x=result[0];
 		p.y=result[1];
-
-		//debug_line.p1 = [p.x,p.y];
-		//debug_line.p2 = result;
 	});
 let playerPath = [];
 
