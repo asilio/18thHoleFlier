@@ -34,7 +34,7 @@ ComponentFactory.createComponent("Sprite",player.id,"./Assets/disc.png");
 ComponentFactory.createComponent("Position",player.id,10*TILE_SIZE,15*TILE_SIZE);
 layers[1]=ComponentFactory.createComponent("Layer",player.id,1,context.canvas.width,context.canvas.height);
 const p = Position.Positions[player.id];
-ComponentFactory.createComponent("Speed",player.id,10);
+ComponentFactory.createComponent("Speed",player.id,100);
 
 //*** Keyboard Listener ***//
 document.addEventListener(
@@ -173,7 +173,7 @@ let sx = 0;
 let sy = 0;
 
 function update(time_slice){
-	//console.log(distance, N, M, travel_time,dt);
+	console.log(distance, N, M, travel_time,dt);
 	if(distance > 0 && travel_time == 0 && N==0){
 		travel_time = 1000*distance/players;
 		N = Math.floor(travel_time/time_slice);
