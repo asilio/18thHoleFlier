@@ -33,7 +33,7 @@ class ComponentFactory{
 				return Sprite.Sprites[eid];
 			case 'selectable':
 				if(Selectable.Selectables[eid] == undefined){
-					console.log(...args);
+					//console.log(...args);
 					let s = new Selectable(...args);
 					Selectable.Selectables[eid] = s;
 				}

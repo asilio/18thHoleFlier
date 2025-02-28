@@ -78,7 +78,7 @@ function PositionSelectableLayerFactory(x,y,selected, sprite1,sprite2,layer){
 let hover = PositionSpriteLayerFactory(-100,0,"./Assets/hoverbox.png", 1);
 let target = PositionSpriteLayerFactory(-100,0,"./Assets/target.png", 1);
 let center = PositionSpriteLayerFactory(-100,0,"./Assets/center.png", 1);
-let midpoint = PositionSelectableLayerFactory(-100,0,"./Assets/midpoint.png", 1);
+let midpoint = PositionSpriteLayerFactory(-100,0,"./Assets/midpoint.png", 1);
 let lefty = PositionSelectableLayerFactory(32,0,false,"./Assets/lefty-select.png","./Assets/lefty.png", 2);
 let righty = PositionSelectableLayerFactory(64,0,true,"./Assets/righty-select.png","./Assets/righty.png", 2);
 
