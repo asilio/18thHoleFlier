@@ -79,6 +79,8 @@ context.canvas.addEventListener('mousemove',
 		p.x=result[0];
 		p.y=result[1];
 	});
+let playerPath = [];
+
 context.canvas.addEventListener('mouseup',
 	(event)=>{
 		let cx = event.offsetX;
@@ -87,12 +89,44 @@ context.canvas.addEventListener('mouseup',
 		let p = Position.Positions[target.id];
 		p.x=result[0];
 		p.y=result[1];
+		let pp = Position.Positions[player.id];
+		playerPath=makeArc(pp.x,pp.y,p.x,p.y,0.5);
 	});
+
+
+
+function makeArc(x1,y1,x2,y2,d,dt=0.001){
+	let t1 = Math.arctan2(y1-y2,x1-x2);
+	let t2 = t1 + Math.PI/2;
+	let cx = (x1+x2)/2+d*Math.cos(t2);
+	let cy = (y1+y2)/2+d*Math.sin(t2);
+	let r  = Math.sqrt((cx-x1)*(cx-x1)+(cy-y1)*(cy-y1));
+	let t0 = Math.arctan2(cy-y1,cx-x1);
+	let tf = Math.arctan2(cy-y2,cx-x2);
+	let t = 0;
+	while(t<1){
+		playerPath.push([
+			cx-R*Math.cos(t0+t*(t1-t0)),
+			cy-R*Math.sin(t0+t*(t1-t0)) 
+			]);
+		t+=dt;
+	}	
+}
 /*** Main Loop ***/
 layers[0].render();
 function main(){
 	context.clearRect(0,0,context.canvas.width,context.canvas.height);
-
+	let p = Position.Positions[player.id];
+	if(playerPath.length>0){
+		let next = playerPath.pop();
+		p.x = next[0];
+		p.y = next[1];
+	}
+	else{
+		let result = canvas_pixel_to_tile_corner(p.x,p.y);
+		p.x = result[0];
+		p.y = result[0];
+	}
 	layers[1].render();
 
 	layers[0].update(context);
