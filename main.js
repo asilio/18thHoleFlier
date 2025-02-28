@@ -63,18 +63,31 @@ ComponentFactory.createComponent("Sprite",hover.id,"./Assets/hoverbox.png");
 ComponentFactory.createComponent("Position",hover.id,-100,0);
 ComponentFactory.createComponent("Layer",hover.id,1,context.canvas.width,context.canvas.height);
 
+let target = new Entity();
+ComponentFactory.createComponent("Sprite",target.id,"./Assets/target.png");
+ComponentFactory.createComponent("Position",target.id,-100,0);
+ComponentFactory.createComponent("Layer",target.id,1,context.canvas.width,context.canvas.height);
+
 context.canvas.addEventListener('mousemove',
 	(event)=>{
 		let cx = event.offsetX;
 		let cy = event.offsetY;
-		console.log("Tiles", cx,cy,pixel_to_tile(cx,cy));
+		
 		let result = canvas_pixel_to_tile_corner(cx,cy);
-		console.log("Positions",cx,cy,result)
+		
 		let p = Position.Positions[hover.id];
 		p.x=result[0];
 		p.y=result[1];
 	});
-
+context.canvas.addEventListener('mouseup',
+	(event)=>{
+		let cx = event.offsetX;
+		let cy = event.offsetY;
+		let result = canvas_pixel_to_tile_corner(cx,cy);
+		let p = Position.Positions[target.id];
+		p.x=result[0];
+		p.y=result[0];
+	});
 /*** Main Loop ***/
 layers[0].render();
 function main(){
