@@ -109,7 +109,7 @@ context.canvas.addEventListener('mouseup',
 
 
 function makeArc(x1,y1,x2,y2,d,dt=0.01){
-	let t1 = Math.atan2(y1-y2,x1-x2);
+	let t1 = Math.atan2(y2-y1,x2-x1);
 	let t2 = t1 + Math.PI/2;
 	let cx = (x1+x2)/2+d*Math.cos(t2);
 	let cy = (y1+y2)/2+d*Math.sin(t2);
