@@ -64,6 +64,7 @@ function PositionSpriteLayerFactory(x,y,sprite,layer){
 	ComponentFactory.createComponent("Position",E.id,x,y);
 	let L = ComponentFactory.createComponent("Layer",E.id,layer,context.canvas.width,context.canvas.height);
 	layers[L.layer]=L;
+	return E;
 }
 let hover = PositionSpriteLayerFactory(-100,0,"./Assets/hoverbox.png", 1);
 let target = PositionSpriteLayerFactory(-100,0,"./Assets/target.png", 1);
@@ -93,14 +94,14 @@ context.canvas.addEventListener('mouseup',
 		let p = Position.Positions[target.id];
 		p.x=result[0];
 		p.y=result[1];
-		let pp = Position.Positions[player.id];
-		let ps = Speed.Speeds[player.id].speed;
-		playerPath=makeArc(pp.x,pp.y,p.x,p.y,32*2,'right');
+		//let pp = Position.Positions[player.id];
+		//let ps = Speed.Speeds[player.id].speed;
+		//playerPath=makeArc(pp.x,pp.y,p.x,p.y,32*2,'right');
 	});
 
 
 
-function makeArc(x1,y1,x2,y2,d,hyzer='left',dt=0.01){
+function getArcPosition(x1,y1,x2,y2,d,hyzer='left',t=0){
 	let t1 = Math.atan2(y2-y1,x2-x1);
 	if(hyzer = 'right') t1 = Math.atan2(y1-y2,x1-x2);
 	let t2 = t1 + Math.PI/2;
@@ -117,7 +118,7 @@ function makeArc(x1,y1,x2,y2,d,hyzer='left',dt=0.01){
 	//console.log(`t1: ${t1}, \nt2: ${t2}`);
 	//console.log(`dx: ${d*Math.cos(t1)}\ndy:${d*Math.sin(t1)}`);
 	//console.log(`t0: ${t0},\ntf: ${tf}\n|t0-tf|${Math.abs(t0-tf)}`);
-	
+	console.log(r*Math.abs(t0-tf));
 
 	let cp = Position.Positions[center.id];
 	let mp = Position.Positions[midpoint.id]
@@ -125,20 +126,24 @@ function makeArc(x1,y1,x2,y2,d,hyzer='left',dt=0.01){
 	mp.y = (y1+y2)/2;
 	cp.x = cx;
 	cp.y = cy;
-
+	return [
+		cx-r*Math.cos(t0+t*(tf-t0)),
+		cy-r*Math.sin(t0+t*(tf-t0)) 
+		];
 	//Path
-	let t = 0;
+	
+	//let t = 0;
 
-	let path = [];
-	while(t<=1){
-		path.push([
-			cx-r*Math.cos(t0+t*(tf-t0)),
-			cy-r*Math.sin(t0+t*(tf-t0)) 
-			]);
-		t+=dt;
-	}
-	path.push(canvas_pixel_to_tile_corner(x2,y2));
-	return path;
+	//let path = [];
+	//while(t<=1){
+	//	path.push([
+	//		cx-r*Math.cos(t0+t*(tf-t0)),
+	//		cy-r*Math.sin(t0+t*(tf-t0)) 
+	//		]);
+	//	t+=dt;
+	//}
+	//path.push(canvas_pixel_to_tile_corner(x2,y2));
+	//return path;
 }
 /*** Main Loop ***/
 
