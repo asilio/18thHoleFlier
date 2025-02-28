@@ -22,8 +22,8 @@ for(let i = 0;i<WIDTH*HEIGHT;i++){
 	ComponentFactory.createComponent("Sprite",t.id,"./Assets/tile.png");
 	ComponentFactory.createComponent("Position",t.id,TILE_SIZE*(i%WIDTH),TILE_SIZE*Math.floor(i/WIDTH));
 }
-ComponentFactory.createComponent("Sprite",player.id,"./Assets/player.png");
-ComponentFactory.createComponent("Position",player.id,64,64);
+ComponentFactory.createComponent("Sprite",player.id,"./Assets/disc.png");
+ComponentFactory.createComponent("Position",player.id,0,0);
 const p = Position.Positions[player.id];
 //*** Keyboard Listener ***//
 document.addEventListener(
