@@ -300,7 +300,7 @@ function update(time_slice){
 				dy = lasty-playerp.y;
 				d = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
 				dx = dx/d*32;
-				dy = dy/d*32
+				dy = dy/d*32;
 				[playerp.x, playerp.y] = canvas_pixel_to_tile_corner(lastx+dx,lasty+dy);
 				M = N+1
 			break;
