@@ -118,6 +118,7 @@ class Layer extends Component{
 		this.context.clearRect(0,0,this.context.canvas.width,this.context.canvas.height);
 		for(let eid in Layer.Layers[this.layer]){
 			if(eid in Sprite.Sprites){
+				console.log(eid);
 				Sprite.Sprites[eid].draw(this.context,eid);
 			}
 		}
