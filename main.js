@@ -1,10 +1,10 @@
-import {Entity,Sprite,Line, Speed,Layer, Position, ComponentFactory} from "./modules/framework.js";
+import {Entity,Sprite,Line, Speed,Layer, Position, ComponentFactory, Selectable} from "./modules/framework.js";
 
 /*** Level Data ***/
 const context = document.getElementById("canvas").getContext('2d');
 const TILE_SIZE = 32;
-const WIDTH = 40;
-const HEIGHT = 100;
+const WIDTH = 50;
+const HEIGHT = 40;
 
 function pixel_to_tile(px,py){
 	return [Math.floor(px/TILE_SIZE), Math.floor(py/TILE_SIZE)];
@@ -66,11 +66,21 @@ function PositionSpriteLayerFactory(x,y,sprite,layer){
 	layers[L.layer]=L;
 	return E;
 }
+
+function PositionSelectableLayerFactory(x,y,sprite1,sprite2,layer){
+	let E = new Entity();
+	ComponentFactory.createComponent("Selectable",E.id,false, sprite1,sprite2);
+	ComponentFactory.createComponent("Position",E.id,x,y);
+	let L = ComponentFactory.createComponent("Layer",E.id,layer,context.canvas.width,context.canvas.height);
+	layers[L.layer]=L;
+	return E;
+}
 let hover = PositionSpriteLayerFactory(-100,0,"./Assets/hoverbox.png", 1);
 let target = PositionSpriteLayerFactory(-100,0,"./Assets/target.png", 1);
 let center = PositionSpriteLayerFactory(-100,0,"./Assets/center.png", 1);
-let midpoint = PositionSpriteLayerFactory(-100,0,"./Assets/midpoint.png", 1);
-let lefty = PositionSpriteLayerFactory(32,0,"./Assets/lefty.png", 2);
+let midpoint = PositionSelectableLayerFactory(-100,0,"./Assets/midpoint.png", 1);
+let lefty = PositionSelectableLayerFactory(32,0,false,"./Assets/lefty-select.png","./Assets/lefty.png", 2);
+let righty = PositionSelectableLayerFactory(64,0,false,"./Assets/righty-select.png","./Assets/righty.png", 2);
 
 let distance = 0;
 /*** Mouse Events ***/

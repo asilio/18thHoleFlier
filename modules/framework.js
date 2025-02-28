@@ -31,6 +31,13 @@ class ComponentFactory{
 					Sprite.Sprites[eid] = s;
 				}
 				return Sprite.Sprites[eid];
+			case 'selectable':
+				if(Selectable.Selectables[eid] == undefined){
+					let s = new Selectable(...args);
+					Selectable.Selectables[eid] = s;
+				}
+				return Selectable.Selectabls[eid];
+
 			case 'layer':
 				let layer = args[0];
 				if(Layer.Layers[layer] == undefined)
@@ -75,6 +82,62 @@ class Position extends Component{
 		return Math.sqrt(Math.pow(this.x-to.x,2)+Math.pow(this.y-to.y,2));
 	}
 	
+}
+
+class Selectable extends Component{
+	static Selectables = {};
+	static remove(eid){
+		delete Selectable.Selectables[eid];
+	}
+
+	constructor(isSelected,selectedSprite, defaultSprite){
+		super();
+		this.isSelected = isSelected;
+		this.selectedSprite = new Image();
+		this.selectedSprite.src = selectedSprite;
+		this.defaultSprite = new Image();
+		this.defaultSprite.src = defaultSprite;
+		this.selectedSpriteReady = false;
+		this.defaultSpriteReady = false;
+		this.selectedSprite.addEventListener("load",this.setSelectedReady.bind(this));
+		this.defaultSprite.addEventListener("load",this.setDefaultReady.bind(this));
+	}
+
+	setSelectedReady(){
+		this.selectedSpriteReady=true;
+	}
+
+	setDefaultReady(){
+		this.defaultSpriteReady=true;
+	}
+
+	isInSprite(x,y,eid){
+		let p = Position.Positions[eid];
+		let sw = this.defaultSprite.width;
+		let sh = this.defaultSprite.height;
+		return (x> p.x && x< p.x+sw) && (y>p.y && y<p.y+sh);
+	}
+
+	toggleSelected(){
+		this.isSelected = !this.isSelected;
+	}
+
+	draw(context,eid){
+		if(!(this.defaultSpriteReady && this.selectedSpriteReady)) return false;
+		let p = Position.Positions[eid];
+		if(p == undefined) return false;
+		if(this.isSelected){
+			context.drawImage(this.selectedSprite,p.x,p.y)
+		}else{
+			context.drawImage(this.defaultSprite,p.x,p.y);
+		}
+	}
+
+	update(context,eid){
+		this.draw(context,eid);
+	}
+
+
 }
 
 class Speed extends Component{
@@ -181,4 +244,4 @@ class Layer extends Component{
 	}
 }
 
-export{Entity,Line, ComponentFactory,Layer, Sprite, Position, Speed}
+export{Entity,Line, ComponentFactory,Layer, Sprite, Position, Speed,Selectable}
