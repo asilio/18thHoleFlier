@@ -79,7 +79,7 @@ context.canvas.addEventListener('mousemove',
 		p.x=result[0];
 		p.y=result[1];
 	});
-const playerPath = [];
+let playerPath = [];
 
 context.canvas.addEventListener('mouseup',
 	(event)=>{
