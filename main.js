@@ -97,7 +97,8 @@ context.canvas.addEventListener('mouseup',
 		p.y=result[1];
 
 		let pp = Position.Positions[player.id];
-		distance=getArcPosition(pp.x,pp.y,p.x,p.y,32*2,'right')[2];
+		let x, y;
+		[x,y,distance]=getArcPosition(pp.x,pp.y,p.x,p.y,32*2,'right',0);
 	});
 
 
@@ -119,7 +120,7 @@ function getArcPosition(x1,y1,x2,y2,d,hyzer='left',t=0){
 	//console.log(`t1: ${t1}, \nt2: ${t2}`);
 	//console.log(`dx: ${d*Math.cos(t1)}\ndy:${d*Math.sin(t1)}`);
 	//console.log(`t0: ${t0},\ntf: ${tf}\n|t0-tf|${Math.abs(t0-tf)}`);
-	console.log(r*Math.abs(t0-tf));
+	//console.log(r*Math.abs(t0-tf));
 
 	let cp = Position.Positions[center.id];
 	let mp = Position.Positions[midpoint.id]
@@ -129,7 +130,8 @@ function getArcPosition(x1,y1,x2,y2,d,hyzer='left',t=0){
 	cp.y = cy;
 	return [
 		cx-r*Math.cos(t0+t*(tf-t0)),
-		cy-r*Math.sin(t0+t*(tf-t0)) 
+		cy-r*Math.sin(t0+t*(tf-t0)),
+		r*Math.abs(t0-tf)
 		];
 	//Path
 	
