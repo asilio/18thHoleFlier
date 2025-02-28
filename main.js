@@ -206,7 +206,7 @@ function main(){
 	delta_time = time_now - time_last_update;
 	time_last_update += delta_time;
 	time_accumulator += delta_time;
-	console.log(time_now, time_last_update, delta_time, time_accumulator, time_slice);
+	//console.log(time_now, time_last_update, delta_time, time_accumulator, time_slice);
 	while(time_accumulator> time_slice)
 	{
 		update(time_slice);
