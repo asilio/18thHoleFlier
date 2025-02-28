@@ -101,6 +101,11 @@ class Layer extends Component{
 		delete Layer.Layers[layer][eid];
 	}
 
+	static getLayer(layer){
+		let eid = Object.keys(Layer.Layers[layer])[0];
+		return Layer.Layers[layer][eid];
+	}
+
 	constructor(layer){
 		super();
 		Layer.Layers[layer] = Layer.Layers[layer] || {};
@@ -119,7 +124,6 @@ class Layer extends Component{
 	}
 
 	update(context){
-
 		context.drawImage(this.canvas,0,0);
 	}
 }

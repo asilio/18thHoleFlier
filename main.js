@@ -16,17 +16,19 @@ function tile_to_pixel(tx,ty){
 
 
 let player= new Entity("Player");
+let layers = [];
+
 for(let i = 0;i<WIDTH*HEIGHT;i++){
 	let t = new Entity("Generic Tile");
 	ComponentFactory.createComponent("Sprite",t.id,"./Assets/tile.png");
 	ComponentFactory.createComponent("Position",t.id,TILE_SIZE*(i%WIDTH),TILE_SIZE*Math.floor(i/WIDTH));
-	ComponentFactory.createComponent("Layer",t.id, 0,context.canvas.width,context.canvas.height);
+	layers[0]=ComponentFactory.createComponent("Layer",t.id, 0,context.canvas.width,context.canvas.height);
 }
 
 
 ComponentFactory.createComponent("Sprite",player.id,"./Assets/disc.png");
 ComponentFactory.createComponent("Position",player.id,0,0);
-ComponentFactory.createComponent("Layer",player.id,1,context.canvas.width,context.canvas.height);
+layers[1]=ComponentFactory.createComponent("Layer",player.id,1,context.canvas.width,context.canvas.height);
 
 const p = Position.Positions[player.id];
 //*** Keyboard Listener ***//
@@ -50,15 +52,17 @@ document.addEventListener(
 		}
 	}
 	)
-let bglid = Object.keys(Layer.Layers[0])[0];
-Layer.Layers[0][bglid].render();
-Layer.Layers[1][0].render();
+
+
+
+
 function main(){
 	context.clearRect(0,0,context.canvas.width,context.canvas.height);
-	Layer.Layers[1][0].render();
 
-	Layer.Layers[0][bglid].update(context);
-	Layer.Layers[1][0].update(context);
+	layers[1].render();
+
+	layers[0].update(context);
+	layers[1].update(context);
 	requestAnimationFrame(main);
 }
 
