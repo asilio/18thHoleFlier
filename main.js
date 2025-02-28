@@ -262,6 +262,7 @@ function checkTile(x,y){
 	for(let eid in Layer.Layers[0]){
 		if(eid in Sprite.Sprites){
 			if(Sprite.Sprites[eid].isInSprite(x,y,eid)){
+				console.log(Sprite.Sprites[eid].sprite.src);
 				return asset_map[Sprite.Sprites[eid].sprite.src];
 			}
 		}
