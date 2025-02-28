@@ -21,23 +21,29 @@ function canvas_pixel_to_tile_corner(cx,cy){
 
 let player= new Entity("Player");
 let layers = [];
-let asset_map={
-	"./Assets/fair.png":"fair",
-	"./Assets/rough.png":"rough",
-	"./Assets/tree.png":"tree"
-}
+
 for(let i = 0;i<WIDTH*HEIGHT;i++){
 	let t = new Entity("Generic Tile");
-	if(Math.random()<0.5)
+	if(Math.random()<0.5){
 		ComponentFactory.createComponent("Sprite",t.id,"./Assets/fair.png");
-	else if(Math.random()<0.5)
+		ComponentFactory.createComponent("Environment",t.id,"fair");
+	}
+	else if(Math.random()<0.5){
 		ComponentFactory.createComponent("Sprite",t.id,"./Assets/fair.png");
-	else if(Math.random()<0.5)
+		ComponentFactory.createComponent("Environment",t.id,"fair");
+	}
+	else if(Math.random()<0.5){
 		ComponentFactory.createComponent("Sprite",t.id,"./Assets/rough.png");
-	else if(Math.random()<0.5)
+		ComponentFactory.createComponent("Environment",t.id,"rough");
+	}
+	else if(Math.random()<0.5){
 		ComponentFactory.createComponent("Sprite",t.id,"./Assets/rough.png");
-	else
+		ComponentFactory.createComponent("Environment",t.id,"rough");
+	}
+	else{
 		ComponentFactory.createComponent("Sprite",t.id,"./Assets/tree.png");
+		ComponentFactory.createComponent("Environment",t.id,"tree");
+	}
 
 	ComponentFactory.createComponent("Position",t.id,TILE_SIZE*((i)%WIDTH+1),TILE_SIZE*Math.floor((i)/WIDTH+1));
 	layers[0]=ComponentFactory.createComponent("Layer",t.id, 0,context.canvas.width,context.canvas.height);
@@ -259,13 +265,9 @@ let sx = 0;
 let sy = 0;
 
 function checkTile(x,y){
-	for(let eid in Layer.Layers[0]){
-		if(eid in Sprite.Sprites){
-			if(Sprite.Sprites[eid].isInSprite(x,y,eid)){
-				console.log(Sprite.Sprites[eid].sprite.src);
-				return asset_map[Sprite.Sprites[eid].sprite.src];
-			}
-		}
+	for(let eid in Environment.Environments){
+		if(Environment.Environments[eid].isInSprite(x,y,eid));
+			return Environment.Environments[eid].environment;
 	}
 	return "OOB"
 }

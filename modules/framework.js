@@ -212,6 +212,24 @@ class Sprite extends Component{
 	}
 }
 
+class Environment extends Component{
+	static Environments=[];
+	static remove(eid){
+		delete Environment.Evironments[eid];
+	}
+
+	constructor(environment){
+		super();
+		this.environment=environment;
+	}
+
+	isInSprite(x,y,eid){
+		if(eid in Sprite.Sprites){
+			return Sprite.Sprites[eid].isInSprite(x,y,eid);
+		}
+	}
+}
+
 class Layer extends Component{
 	static Layers=[];
 	static removeFromLayer(layer,eid){
