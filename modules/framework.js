@@ -25,6 +25,15 @@ class ComponentFactory{
 					Sprite.Sprites[eid] = s;
 				}
 				return Sprite.Sprites[eid];
+			case 'layer':
+				let layer = args[0];
+				if(Layer.Layers[layer][eid] == undefined)
+				{
+					let l = new Layer(...args);
+					Layer.Layers[layer][eid]=l;	
+				}
+				
+				return Layer.Layers[l.layer][eid];
 		}
 
 	}
@@ -83,8 +92,31 @@ class Sprite extends Component{
 	}
 }
 
-class System{
-	constructor(){}
+class Layer extends Component{
+	static Layers=[];
+	static removeFromLayer(layer,eid){
+		delete Layer.Layers[layer][eid];
+	}
+
+	constructor(layer){
+		super();
+		Layer.Layers[layer] = Layer.Layers[layer] || {};
+		this.layer  = layer;
+		this.canvas = document.createElement("canvas");
+		this.context = this.canvas.getContext("2d");
+	}
+
+	render(){
+		for(let eid in Layer.Layers[this.layer]){
+			if(eid in Sprite.Sprites){
+				Sprite.Sprites[eid].draw(this.context,eid);
+			}
+		}
+	}
+
+	update(context){
+		context.drawImage(this.canvas);
+	}
 }
 
 export{Entity, ComponentFactory, Sprite, Position}

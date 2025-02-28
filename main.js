@@ -1,5 +1,4 @@
-import {Entity,Sprite, Position, ComponentFactory} from "./modules/framework.js";
-
+import {Entity,Sprite, Layer, Position, ComponentFactory} from "./modules/framework.js";
 
 /*** Level Data ***/
 const context = document.getElementById("canvas").getContext('2d');
@@ -21,9 +20,14 @@ for(let i = 0;i<WIDTH*HEIGHT;i++){
 	let t = new Entity("Generic Tile");
 	ComponentFactory.createComponent("Sprite",t.id,"./Assets/tile.png");
 	ComponentFactory.createComponent("Position",t.id,TILE_SIZE*(i%WIDTH),TILE_SIZE*Math.floor(i/WIDTH));
+	ComponentFactory.createComponent("Layer",t.id, 0,context.canvas.width,context.canvas.height);
 }
+
+
 ComponentFactory.createComponent("Sprite",player.id,"./Assets/disc.png");
 ComponentFactory.createComponent("Position",player.id,0,0);
+ComponentFactory.createComponent("Layer",player.id,1,context.canvas.width,context.canvas.height);
+
 const p = Position.Positions[player.id];
 //*** Keyboard Listener ***//
 document.addEventListener(
@@ -46,18 +50,13 @@ document.addEventListener(
 		}
 	}
 	)
-
-let count =0;
+Layer.Layers[0].render();
+Layer.Layers[1].render();
 function main(){
-	count++;
 	context.clearRect(0,0,context.canvas.width,context.canvas.height);
-	for(let id in Sprite.Sprites){
-		Sprite.Sprites[id].update(context,id);
-	}
-	Sprite.Sprites[player.id].update(context,player.id);
+	Layer.Layers[1].render();
+	Layer.Layers[1].update(context);
 	requestAnimationFrame(main);
-
-
 }
 
 main();
