@@ -167,7 +167,6 @@ context.canvas.addEventListener('mouseup',
 		let pp = Position.Positions[player.id];
 		let x, y;
 		distance_to_target = Math.floor(pp.distance(p)/TILE_SIZE);
-		console.log(checkForeHand(),checkHandedness());
 		[x,y,distance]=getArcPosition(pp.x,pp.y,p.x,p.y,checkForeHand(),checkHandedness(),0);
 	});
 
@@ -273,7 +272,6 @@ function checkTile(x,y){
 }
 
 function update(time_slice){
-	//console.log(distance, N, M, travel_time,dt);
 	let lastx = playerp.x;
 	let lasty = playerp.y;
 	if(distance > 0 && travel_time == 0 && N==0){
@@ -298,7 +296,6 @@ function update(time_slice){
 		distance = 0;
 	}
 	let s = checkTile(playerp.x+TILE_SIZE/2, playerp.y+TILE_SIZE/2);
-	console.log(`(${playerp.x+TILE_SIZE/2}, ${playerp.y+TILE_SIZE/2})  Ball is over: ${s}`);
 	switch(s){
 		case 'OOB':
 		case 'tree':
@@ -331,7 +328,6 @@ function main(){
 	delta_time = time_now - time_last_update;
 	time_last_update += delta_time;
 	time_accumulator += delta_time;
-	//console.log(time_now, time_last_update, delta_time, time_accumulator, time_slice);
 	while(time_accumulator> time_slice)
 	{
 		update(time_slice);

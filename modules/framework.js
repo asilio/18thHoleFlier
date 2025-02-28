@@ -38,7 +38,12 @@ class ComponentFactory{
 					Selectable.Selectables[eid] = s;
 				}
 				return Selectable.Selectables[eid];
-
+			case 'environment':
+				if(Environment.Environments[eid] == undefined){
+					let e = new Environment(...args);
+					Environment.Environments[eid] = e;
+				}
+				return Environment.Environments[eid];
 			case 'layer':
 				let layer = args[0];
 				if(Layer.Layers[layer] == undefined)
