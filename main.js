@@ -290,8 +290,8 @@ function update(time_slice){
 		dx = x - playerp.x;
 		dy = y - playerp.dy;
 
-		let s = checkTile(playerp.x+dx, playerp.y+dy);
-		//console.log(s);
+		let s = checkTile(x, y);
+		console.log(s);
 		switch(s){
 			case 'OOB':
 			case 'tree':
