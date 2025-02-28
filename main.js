@@ -169,6 +169,9 @@ let time_slice = 0.01*1000;
 let N = 0;
 let M = 0;
 let dt = 0;
+let sx = 0;
+let sy = 0;
+
 function update(time_slice){
 	console.log(distance, N, M, travel_time,dt);
 	if(distance > 0 && travel_time == 0 && N==0){
@@ -176,10 +179,12 @@ function update(time_slice){
 		N = Math.floor(travel_time/time_slice);
 		dt = 1/N;
 		M = 0;
+		sx = playerp.x;
+		sy = playerp.y;
 	}
 	if(M<N && distance>0){
 		let x, y, d;
-		[x, y, d] = getArcPosition(playerp.x,playerp.y,targetp.x,targetp.y,32*2,'right',M/N);
+		[x, y, d] = getArcPosition(sx,sy,targetp.x,targetp.y,32*2,'right',M/N);
 		M+=1;
 		playerp.x = x;
 		playerp.y = y;
