@@ -103,13 +103,14 @@ context.canvas.addEventListener('mouseup',
 		p.x=result[0];
 		p.y=result[1];
 		let pp = Position.Positions[player.id];
-		playerPath=makeArc(pp.x,pp.y,p.x,p.y,32*2);
+		playerPath=makeArc(pp.x,pp.y,p.x,p.y,32*2,'right');
 	});
 
 
 
-function makeArc(x1,y1,x2,y2,d,dt=0.01){
+function makeArc(x1,y1,x2,y2,d,hyzer='left',dt=0.01,){
 	let t1 = Math.atan2(y2-y1,x2-x1);
+	if(hyzer = 'right') t1 = Math.atan2(y1-y2,x1-x2);
 	let t2 = t1 + Math.PI/2;
 	let cx = (x1+x2)/2+d*Math.cos(t2);
 	let cy = (y1+y2)/2+d*Math.sin(t2);
