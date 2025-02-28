@@ -301,8 +301,7 @@ function update(time_slice){
 	switch(s){
 		case 'OOB':
 		case 'tree':
-			playerp.x = lastx;
-			playerp.y = lasty;
+			[playerp.x, playerp.y] = canvas_pixel_to_tile_corner(lastx,lasty);
 			M = N+1
 			break;
 		case 'fair':
