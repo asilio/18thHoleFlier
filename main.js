@@ -168,6 +168,7 @@ context.canvas.addEventListener('mouseup',
 		let x, y;
 		distance_to_target = Math.floor(pp.distance(p)/TILE_SIZE);
 		[x,y,distance]=getArcPosition(pp.x,pp.y,p.x,p.y,checkForeHand(),checkHandedness(),0);
+		requestAnimationFrame(main);
 	});
 
 
@@ -343,7 +344,8 @@ function main(){
 		time_accumulator-=time_slice;
 	}	
 	draw();
-	requestAnimationFrame(main);
+	if(M>0)
+		requestAnimationFrame(main);
 }
 
 main();
