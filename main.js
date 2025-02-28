@@ -95,7 +95,7 @@ context.canvas.addEventListener('mouseup',
 
 
 
-function makeArc(x1,y1,x2,y2,d,dt=0.001){
+function makeArc(x1,y1,x2,y2,d,dt=0.01){
 	let t1 = Math.atan2(y1-y2,x1-x2);
 	let t2 = t1 + Math.PI/2;
 	let cx = (x1+x2)/2+d*Math.cos(t2);
@@ -120,7 +120,7 @@ function main(){
 	context.clearRect(0,0,context.canvas.width,context.canvas.height);
 	let p = Position.Positions[player.id];
 	if(playerPath.length>0){
-		let next = playerPath.pop();
+		let next = playerPath.shift();
 		p.x = next[0];
 		p.y = next[1];
 	}
