@@ -84,6 +84,21 @@ let righty = PositionSelectableLayerFactory(64,0,true,"./Assets/righty-select.pn
 let forehand = PositionSelectableLayerFactory(96,0,false,"./Assets/forehand-select.png","./Assets/forehand.png", 2);
 let backhand = PositionSelectableLayerFactory(96+32,0,true,"./Assets/backhand-select.png","./Assets/backhand.png", 2);
 let distance = 0;
+
+function checkHandedness(){
+	let ls = Selectable.Selectables[lefty.id];
+	let string = 'right';
+	if(ls.isSelected) string = 'left'
+	return string;
+}
+
+function checkForeHand(){
+	let fs = Selectable.Selectables[forehand.id];
+	let string = 'forehand';
+	if(fs.isSelected) string = 'backhand';
+	return string;
+}
+
 /*** Mouse Events ***/
 context.canvas.addEventListener('mousemove',
 	(event)=>{
@@ -102,7 +117,28 @@ context.canvas.addEventListener('mouseup',
 	(event)=>{
 		let cx = event.offsetX;
 		let cy = event.offsetY;
+		if(Selectable.Selectables[lefty.id].isInSprite(cx,cy,lefty.id)){
+			Selectable.Selectables[lefty.id].toggleSelected();
+			Selectable.Selectables[righty.id].isSelected = ! Selectable.Selectables[lefty.id].isSelected;
+			return;
+		}
+		if(Selectable.Selectables[righty.id].isInSprite(cx,cy,righty.id)){
+			Selectable.Selectables[righty.id].toggleSelected();
+			Selectable.Selectables[lefty.id].isSelected = ! Selectable.Selectables[righty.id].isSelected;
+			return;
+		}
+		if(Selectable.Selectables[forehand.id].isInSprite(cx,cy,forehand.id)){
+			Selectable.Selectables[forehand.id].toggleSelected();
+			Selectable.Selectables[backhand.id].isSelected = ! Selectable.Selectables[forehand.id].isSelected;
+			return;
+		}
+		if(Selectable.Selectables[backhand.id].isInSprite(cx,cy,backhand.id)){
+			Selectable.Selectables[backhand.id].toggleSelected();
+			Selectable.Selectables[forehand.id].isSelected = ! Selectable.Selectables[backhand.id].isSelected;
+			return;
+		}
 		let result = canvas_pixel_to_tile_corner(cx,cy);
+
 		let p = Position.Positions[target.id];
 		p.x=result[0];
 		p.y=result[1];
@@ -111,7 +147,8 @@ context.canvas.addEventListener('mouseup',
 		let x, y;
 		let d = Math.floor(pp.distance(p)/TILE_SIZE);
 		center_offset = d*TILE_SIZE;
-		[x,y,distance]=getArcPosition(pp.x,pp.y,p.x,p.y,center_offset,'right',0);
+		let string = checkHandedness();
+		[x,y,distance]=getArcPosition(pp.x,pp.y,p.x,p.y,center_offset,string,0);
 	});
 
 
@@ -198,7 +235,7 @@ function update(time_slice){
 	}
 	if(M<=N && distance>0){
 		let x, y, d;
-		[x, y, d] = getArcPosition(sx,sy,targetp.x,targetp.y,center_offset,'right',M/N);
+		[x, y, d] = getArcPosition(sx,sy,targetp.x,targetp.y,center_offset,checkHandedness(),M/N);
 		M+=1;
 		playerp.x = x;
 		playerp.y = y;
