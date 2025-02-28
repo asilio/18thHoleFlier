@@ -206,8 +206,8 @@ class Sprite extends Component{
 
 	isInSprite(x,y,eid){
 		let p = Position.Positions[eid];
-		let sw = this.defaultSprite.width;
-		let sh = this.defaultSprite.height;
+		let sw = this.sprite.width;
+		let sh = this.sprite.height;
 		return (x> p.x && x< p.x+sw) && (y>p.y && y<p.y+sh);
 	}
 }
