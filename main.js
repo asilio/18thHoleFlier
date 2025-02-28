@@ -129,8 +129,8 @@ function makeArc(x1,y1,x2,y2,d,dt=0.01){
 	let path = [];
 	while(t<=1){
 		path.push([
-			cx-r*Math.cos(t0+t*(t1-t0)),
-			cy-r*Math.sin(t0+t*(t1-t0)) 
+			cx-r*Math.cos(t0+t*(tf-t0)),
+			cy-r*Math.sin(t0+t*(tf-t0)) 
 			]);
 		t+=dt;
 	}
