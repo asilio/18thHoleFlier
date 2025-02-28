@@ -95,7 +95,7 @@ context.canvas.addEventListener('mouseup',
 		p.x=result[0];
 		p.y=result[1];
 		let pp = Position.Positions[player.id];
-		playerPath=makeArc(pp.x,pp.y,cx,cy,32*2);
+		playerPath=makeArc(pp.x,pp.y,p.x,p.y,32*2);
 	});
 
 
@@ -113,6 +113,7 @@ function makeArc(x1,y1,x2,y2,d,dt=0.01){
 	let cp = Position.Positions[center.id];
 	cp.x = cx-16;
 	cp.y = cy-16;
+	//Path
 	let t = 0;
 	let path = [];
 	while(t<1){
