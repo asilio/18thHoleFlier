@@ -95,7 +95,7 @@ context.canvas.addEventListener('mouseup',
 		p.x=result[0];
 		p.y=result[1];
 		let pp = Position.Positions[player.id];
-		playerPath=makeArc(pp.x,pp.y,p.x,p.y,32*2);
+		playerPath=makeArc(pp.x,pp.y,cx,cy,32*2);
 	});
 
 
@@ -104,7 +104,7 @@ function makeArc(x1,y1,x2,y2,d,dt=0.01){
 	let t1 = Math.atan2(y1-y2,x1-x2);
 	let t2 = t1 + Math.PI/2;
 	let cx = (x1+x2)/2-d*Math.cos(t2);
-	let cy = (y1+y2)/2+d*Math.sin(t2);
+	let cy = (y1+y2)/2-d*Math.sin(t2);
 	let r  = Math.sqrt((cx-x1)*(cx-x1)+(cy-y1)*(cy-y1));
 	let t0 = Math.atan2(cy-y1,cx-x1);
 	let tf = Math.atan2(cy-y2,cx-x2);
@@ -122,7 +122,7 @@ function makeArc(x1,y1,x2,y2,d,dt=0.01){
 			]);
 		t+=dt;
 	}
-	path.push([x2,y2]);
+	path.push(canvas_pixel_to_tile_corner(x2,y2));
 	return path;
 }
 /*** Main Loop ***/
