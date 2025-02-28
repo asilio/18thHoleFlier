@@ -124,6 +124,7 @@ class Selectable extends Component{
 	}
 
 	draw(context,eid){
+		//console.log(this);
 		if(!(this.defaultSpriteReady && this.selectedSpriteReady)) return false;
 		let p = Position.Positions[eid];
 		if(p == undefined) return false;
@@ -234,6 +235,9 @@ class Layer extends Component{
 				if(!Sprite.Sprites[eid].draw(this.context,eid)){
 					flag = false
 				};
+			}
+			if(eid in Selectable.Selectables){
+				if(!Selectable.Selectables[eid].draw(this.context,eid)) flag = false;
 			}
 		}
 		this.rendered = flag;
