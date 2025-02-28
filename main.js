@@ -81,7 +81,8 @@ let center = PositionSpriteLayerFactory(-100,0,"./Assets/center.png", 1);
 let midpoint = PositionSpriteLayerFactory(-100,0,"./Assets/midpoint.png", 1);
 let lefty = PositionSelectableLayerFactory(32,0,false,"./Assets/lefty-select.png","./Assets/lefty.png", 2);
 let righty = PositionSelectableLayerFactory(64,0,true,"./Assets/righty-select.png","./Assets/righty.png", 2);
-
+let forehand = PositionSelectableLayerFactory(96,0,false,"./Assets/forehand-select.png","./Assets/forehand.png", 2);
+let backhand = PositionSelectableLayerFactory(96+32,0,true,"./Assets/backhand-select.png","./Assets/backhand.png", 2);
 let distance = 0;
 /*** Mouse Events ***/
 context.canvas.addEventListener('mousemove',
