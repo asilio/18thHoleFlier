@@ -50,8 +50,8 @@ document.addEventListener(
 		}
 	}
 	)
-console.log(Layer.Layers[0]);
-Layer.Layers[0][0].render();
+
+Layer.Layers[0][1].render();
 Layer.Layers[1][0].render();
 function main(){
 	context.clearRect(0,0,context.canvas.width,context.canvas.height);
