@@ -66,7 +66,14 @@ class Position extends Component{
 			this.x = x;
 			this.y = y;
 	}
-	update(){}
+	update(x,y){
+		this.x=x;
+		this.y=y;
+	}
+
+	distance(to){
+		return Math.sqrt(Math.pow(this.x-to.x,2)+Math.pow(this.y-to.y,2));
+	}
 	
 }
 

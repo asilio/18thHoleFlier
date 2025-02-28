@@ -34,7 +34,7 @@ ComponentFactory.createComponent("Sprite",player.id,"./Assets/disc.png");
 ComponentFactory.createComponent("Position",player.id,10*TILE_SIZE,15*TILE_SIZE);
 layers[1]=ComponentFactory.createComponent("Layer",player.id,1,context.canvas.width,context.canvas.height);
 const p = Position.Positions[player.id];
-ComponentFactory.createComponent("Speed",player.id,30);
+ComponentFactory.createComponent("Speed",player.id,10);
 
 //*** Keyboard Listener ***//
 document.addEventListener(
@@ -72,6 +72,7 @@ let center = PositionSpriteLayerFactory(-100,0,"./Assets/center.png", 1);
 let midpoint = PositionSpriteLayerFactory(-100,0,"./Assets/midpoint.png", 1);
 let lefty = PositionSpriteLayerFactory(32,0,"./Assets/lefty.png", 2);
 console.log(layers);
+let distance = 0;
 /*** Mouse Events ***/
 context.canvas.addEventListener('mousemove',
 	(event)=>{
@@ -94,8 +95,9 @@ context.canvas.addEventListener('mouseup',
 		let p = Position.Positions[target.id];
 		p.x=result[0];
 		p.y=result[1];
+
 		let pp = Position.Positions[player.id];
-		getArcPosition(pp.x,pp.y,p.x,p.y,32*2,'right');
+		distance=getArcPosition(pp.x,pp.y,p.x,p.y,32*2,'right')[2];
 	});
 
 
@@ -149,19 +151,45 @@ function getArcPosition(x1,y1,x2,y2,d,hyzer='left',t=0){
 for(let i = 0;i<layers.length;i++){
 	layers[i].render();
 }
-function main(){
-	context.clearRect(0,0,context.canvas.width,context.canvas.height);
-	let p = Position.Positions[player.id];
-	if(playerPath.length>0){
-		let next = playerPath.shift();
-		p.x = next[0];
-		p.y = next[1];
+
+let travel_time = 0;
+let playerp = Position.Positions[player.id];
+let players = Speed.Speeds[player.id].speed;
+let targetp = Position.Positions[target.id];
+//Timing Setup for game loop
+let time_last_update=Date.now();
+let time_now;
+let delta_time;
+let time_accumulator;
+let time_slice = 0.01*1000;
+let N = 0;
+let M = 0;
+let dt = 0;
+function update(time_slice){
+	if(distance > 0 && travel_time == 0 && N=0){
+		travel_time = 1000*distance/players;
+		N = Math.floor(travel_time/time_slice);
+		dt = 1/N;
+		M = 0;
 	}
-	else{
-		let targetp = Position.Positions[target.id];
-		targetp.x =- 100;
+	if(M<N){
+		let x, y;
+		let t = dt*M
+		[x, y, distance] = getArcPosition(playerp.x,playerp.y,targetp.x,targetp.y,32*2,'right',t);
+		M+=1;
+		playerp.x = x;
+		playerp.y = y;
+	}
+	if(M>=N){
+		travel_time = 0;
+		M = 0;
+		N = 0;
 	}
 
+}
+
+function draw(){
+	context.clearRect(0,0,context.canvas.width,context.canvas.height);
 	for(let i = 1;i<layers.length;i++){
 		//Skip the background layer render
 		layers[i].render();
@@ -170,6 +198,19 @@ function main(){
 	for(let i = 0;i<layers.length;i++){
 		layers[i].update(context);
 	}
+}
+
+function main(){
+	time_now = Date.now();
+	delta_time = time_now - time_last_update;
+	time_last_update += delta_time;
+	time_accumulator += delta_time
+	while(time_accumulator> time_slice)
+	{
+		update(time_slice);
+		time_accumulator-=time_slice;
+	}	
+	draw();
 	requestAnimationFrame(main);
 }
 
