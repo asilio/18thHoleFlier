@@ -125,9 +125,11 @@ function main(){
 		p.y = next[1];
 	}
 	else{
-		let result = canvas_pixel_to_tile_corner(p.x,p.y);
-		p.x = result[0];
-		p.y = result[0];
+		let targetp = Position.Positions[target.id];
+		p.x = targetp.x;
+		p.y = targetp.y;
+		
+		targetp.x =- 100;
 	}
 	layers[1].render();
 
