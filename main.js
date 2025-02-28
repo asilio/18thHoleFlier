@@ -110,7 +110,7 @@ context.canvas.addEventListener('mouseup',
 
 function makeArc(x1,y1,x2,y2,d,dt=0.01){
 	let t1 = Math.atan2(y1-y2,x1-x2);
-	let t2 = t1 + Math.PI/2;
+	let t2 = t1 - Math.PI/2;
 	let cx = (x1+x2)/2-d*Math.cos(t1);
 	let cy = (y1+y2)/2+d*Math.sin(t1);
 	let r  = Math.sqrt((cx-x1)*(cx-x1)+(cy-y1)*(cy-y1));
@@ -118,7 +118,7 @@ function makeArc(x1,y1,x2,y2,d,dt=0.01){
 	let tf = Math.atan2(cy-y2,cx-x2);
 	//DEBUG
 	console.log(`t1: ${t1}, \nt2: ${t2}`);
-	console.log(`dx: ${d*Math.cos(t2)}\ndy:${d*Math.sin(t2)}`);
+	console.log(`dx: ${d*Math.cos(t1)}\ndy:${d*Math.sin(t1)}`);
 	let cp = Position.Positions[center.id];
 	let mp = Position.Positions[midpoint.id]
 	mp.x = (x1+x2)/2;
