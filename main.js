@@ -169,6 +169,7 @@ function getArcPosition(x1,y1,x2,y2,approach,hyzer='left',t=0){
 		case 'left':
 			if(flip) t1 = Math.atan2(y1-y2,x1-x2);
 			else t1 = Math.atan2(y2-y1,x2-x1);
+			break;
 		case 'right':
 		default:
 			if(flip) t1 = Math.atan2(y2-y1,x2-x1);
