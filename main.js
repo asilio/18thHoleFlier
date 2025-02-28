@@ -296,6 +296,7 @@ function update(time_slice){
 		distance = 0;
 	}
 	let s = checkTile(playerp.x+TILE_SIZE/2, playerp.y+TILE_SIZE/2);
+	console.log(s);
 	switch(s){
 		case 'OOB':
 		case 'tree':
