@@ -19,6 +19,12 @@ class ComponentFactory{
 					Position.Positions[eid] = p;
 				}
 				return Position.Positions[eid];
+			case 'speed':
+				if(Speed.Speeds[eid]==undefined){
+					let s = new Speed(...args);
+					Speed.Speeds[eid] = s;
+				}
+				return Speed.Speeds[eid];
 			case 'sprite':
 				if(Sprite.Sprites[eid]==undefined){
 					let s = new Sprite(...args);
@@ -55,7 +61,7 @@ class Position extends Component{
 	static remove(eid){
 		delete Position.Positions[eid];
 	}
-	constructor(x,y,eid){
+	constructor(x,y){
 			super();
 			this.x = x;
 			this.y = y;
@@ -64,13 +70,25 @@ class Position extends Component{
 	
 }
 
+class Speed extends Component{
+	static Speeds = {};
+	static remove(eid){
+		delete Speed.Speeds[eid];
+	}
+
+	constructor(speed){
+		super();
+		this.speed = speed;
+	}
+}
+
 class Line extends Component{
 	static Lines = {};
 	static remove(eid){
 		delete Line.Lines[eid];
 	}
 
-	constructor(x1,y1,x2,y2,eid){
+	constructor(x1,y1,x2,y2){
 		super();
 		this.p1 = [x1,y1];
 		this.p2 = [x2,y2];
@@ -156,4 +174,4 @@ class Layer extends Component{
 	}
 }
 
-export{Entity,Line, ComponentFactory,Layer, Sprite, Position}
+export{Entity,Line, ComponentFactory,Layer, Sprite, Position, Speed}

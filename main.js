@@ -1,4 +1,4 @@
-import {Entity,Sprite,Line, Layer, Position, ComponentFactory} from "./modules/framework.js";
+import {Entity,Sprite,Line, Speed,Layer, Position, ComponentFactory} from "./modules/framework.js";
 
 /*** Level Data ***/
 const context = document.getElementById("canvas").getContext('2d');
@@ -33,8 +33,9 @@ for(let i = 0;i<WIDTH*HEIGHT;i++){
 ComponentFactory.createComponent("Sprite",player.id,"./Assets/disc.png");
 ComponentFactory.createComponent("Position",player.id,10*32,15*32);
 layers[1]=ComponentFactory.createComponent("Layer",player.id,1,context.canvas.width,context.canvas.height);
-
 const p = Position.Positions[player.id];
+ComponentFactory.createComponent("Speed",player.id,30);
+
 //*** Keyboard Listener ***//
 document.addEventListener(
 	'keyup',
@@ -93,12 +94,13 @@ context.canvas.addEventListener('mouseup',
 		p.x=result[0];
 		p.y=result[1];
 		let pp = Position.Positions[player.id];
+		let ps = Speed.Speeds[player.id].speed;
 		playerPath=makeArc(pp.x,pp.y,p.x,p.y,32*2,'right');
 	});
 
 
 
-function makeArc(x1,y1,x2,y2,d,hyzer='left',dt=0.01,){
+function makeArc(x1,y1,x2,y2,d,hyzer='left',dt=0.01){
 	let t1 = Math.atan2(y2-y1,x2-x1);
 	if(hyzer = 'right') t1 = Math.atan2(y1-y2,x1-x2);
 	let t2 = t1 + Math.PI/2;
@@ -126,6 +128,7 @@ function makeArc(x1,y1,x2,y2,d,hyzer='left',dt=0.01,){
 
 	//Path
 	let t = 0;
+
 	let path = [];
 	while(t<=1){
 		path.push([
@@ -139,7 +142,7 @@ function makeArc(x1,y1,x2,y2,d,hyzer='left',dt=0.01,){
 }
 /*** Main Loop ***/
 
-for(let i = 0;i<=layers.length;i++){
+for(let i = 0;i<layers.length;i++){
 	layers[i].render();
 }
 function main(){
@@ -155,15 +158,14 @@ function main(){
 		targetp.x =- 100;
 	}
 
-	for(let i = 1;i<=layers.length;i++){
+	for(let i = 1;i<layers.length;i++){
 		//Skip the background layer render
 		layers[i].render();
 	}
 
-	for(let i = 0;i<=layers.length;i++){
+	for(let i = 0;i<layers.length;i++){
 		layers[i].update(context);
 	}
-	//debug_line.update(context);
 	requestAnimationFrame(main);
 }
 
