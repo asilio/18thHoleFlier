@@ -14,6 +14,10 @@ function tile_to_pixel(tx,ty){
 	return [TILE_SIZE*tx,TILE_SIZE*ty];
 }
 
+function canvas_pixel_to_tile_corner(cx,cy){
+	return [(cx%TILE_SIZE)*TILE_SIZE,(cy%TILE_SIZE)*TILE_SIZE];
+}
+
 
 let player= new Entity("Player");
 let layers = [];
@@ -51,7 +55,25 @@ document.addEventListener(
 				break;
 		}
 	}
-	)
+	);
+
+/*** Mouse Events ***/
+let hover = new Entity();
+ComponentFactory.createComponent("Sprite",hover.id,"./Assets/hoverbox.png");
+ComponentFactory.createComponent("Position",hover.id,-100,0);
+
+context.canvas.addEventListener('mousemove',
+	(event)=>{
+		let cx = event.offsetX;
+		let cy = event.offsetY;
+		let result = canvas_pixel_to_tile_corner(cx,cy);
+		let p = Position.Positions[hover.id];
+		p.x=result[0];
+		p.y=result[1];
+
+	});
+
+/*** Main Loop ***/
 layers[0].render();
 function main(){
 	context.clearRect(0,0,context.canvas.width,context.canvas.height);
