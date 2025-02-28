@@ -95,8 +95,8 @@ function checkHandedness(){
 
 function checkForeHand(){
 	let fs = Selectable.Selectables[forehand.id];
-	let string = 'forehand';
-	if(fs.isSelected) string = 'backhand';
+	let string = 'backhand';
+	if(fs.isSelected) string = 'forehand';
 	return string;
 }
 
