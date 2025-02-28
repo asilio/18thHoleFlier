@@ -3,8 +3,8 @@ import {Entity,Sprite, Layer, Position, ComponentFactory} from "./modules/framew
 /*** Level Data ***/
 const context = document.getElementById("canvas").getContext('2d');
 const TILE_SIZE = 32;
-const WIDTH = 10;
-const HEIGHT = 10;
+const WIDTH = 40;
+const HEIGHT = 100;
 
 function pixel_to_tile(px,py){
 	return [Math.floor(px/TILE_SIZE), Math.floor(py/TILE_SIZE)];
@@ -106,8 +106,8 @@ function makeArc(x1,y1,x2,y2,d,dt=0.001){
 	let t = 0;
 	while(t<1){
 		playerPath.push([
-			cx-R*Math.cos(t0+t*(t1-t0)),
-			cy-R*Math.sin(t0+t*(t1-t0)) 
+			cx-r*Math.cos(t0+t*(t1-t0)),
+			cy-r*Math.sin(t0+t*(t1-t0)) 
 			]);
 		t+=dt;
 	}	
