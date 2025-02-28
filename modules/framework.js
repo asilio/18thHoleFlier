@@ -274,4 +274,4 @@ class Layer extends Component{
 	}
 }
 
-export{Entity,Line, ComponentFactory,Layer, Sprite, Position, Speed,Selectable}
+export{Entity,Line, ComponentFactory,Layer, Sprite, Position, Speed,Selectable, Environment}

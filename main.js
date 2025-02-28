@@ -1,4 +1,4 @@
-import {Entity,Sprite,Line, Speed,Layer, Position, ComponentFactory, Selectable} from "./modules/framework.js";
+import {Entity,Sprite,Line, Speed,Layer, Position, ComponentFactory, Selectable, Environment} from "./modules/framework.js";
 
 /*** Level Data ***/
 const context = document.getElementById("canvas").getContext('2d');
