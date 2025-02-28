@@ -67,9 +67,9 @@ function PositionSpriteLayerFactory(x,y,sprite,layer){
 	return E;
 }
 
-function PositionSelectableLayerFactory(x,y,sprite1,sprite2,layer){
+function PositionSelectableLayerFactory(x,y,selected, sprite1,sprite2,layer){
 	let E = new Entity();
-	ComponentFactory.createComponent("Selectable",E.id,false, sprite1,sprite2);
+	ComponentFactory.createComponent("Selectable",E.id,selected, sprite1, sprite2);
 	ComponentFactory.createComponent("Position",E.id,x,y);
 	let L = ComponentFactory.createComponent("Layer",E.id,layer,context.canvas.width,context.canvas.height);
 	layers[L.layer]=L;
@@ -80,7 +80,7 @@ let target = PositionSpriteLayerFactory(-100,0,"./Assets/target.png", 1);
 let center = PositionSpriteLayerFactory(-100,0,"./Assets/center.png", 1);
 let midpoint = PositionSelectableLayerFactory(-100,0,"./Assets/midpoint.png", 1);
 let lefty = PositionSelectableLayerFactory(32,0,false,"./Assets/lefty-select.png","./Assets/lefty.png", 2);
-let righty = PositionSelectableLayerFactory(64,0,false,"./Assets/righty-select.png","./Assets/righty.png", 2);
+let righty = PositionSelectableLayerFactory(64,0,true,"./Assets/righty-select.png","./Assets/righty.png", 2);
 
 let distance = 0;
 /*** Mouse Events ***/
