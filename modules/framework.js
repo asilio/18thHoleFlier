@@ -82,10 +82,10 @@ class Sprite extends Component{
 	}
 
 	draw(context,eid){
-		if(!this.ready) return;
+		if(!this.ready) return false;
 		let p = Position.Positions[eid];
 		//console.log(p);
-		if(p==undefined) return;
+		if(p==undefined) return false;
 	
 		context.drawImage(this.sprite,p.x,p.y);
 	}
@@ -112,19 +112,24 @@ class Layer extends Component{
 		this.layer  = layer;
 		this.canvas = document.createElement("canvas");
 		this.context = this.canvas.getContext("2d");
+		this.rendered = false;
 	}
 
 	render(){
 		this.context.clearRect(0,0,this.context.canvas.width,this.context.canvas.height);
+		let flag = true;
 		for(let eid in Layer.Layers[this.layer]){
 			if(eid in Sprite.Sprites){
-				console.log(eid);
-				Sprite.Sprites[eid].draw(this.context,eid);
+				if(!Sprite.Sprites[eid].draw(this.context,eid)){
+					flag = false
+				};
 			}
 		}
+		this.rendered = flag;
 	}
 
 	update(context){
+		if(!this.rendered) this.render();
 		context.drawImage(this.canvas,0,0);
 	}
 }
