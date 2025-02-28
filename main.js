@@ -265,8 +265,9 @@ let sy = 0;
 
 function checkTile(x,y){
 	for(let eid in Environment.Environments){
-		if(Environment.Environments[eid].isInSprite(x,y,eid));
+		if(Environment.Environments[eid].isInSprite(x,y,eid)){
 			return Environment.Environments[eid].environment;
+		}
 	}
 	return "OOB"
 }
