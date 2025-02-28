@@ -298,7 +298,7 @@ function update(time_slice){
 		distance = 0;
 	}
 	let s = checkTile(playerp.x+TILE_SIZE/2, playerp.y+TILE_SIZE/2);
-	console.log(`Ball is over: ${s}`);
+	console.log(`(${playerp.x+TILE_SIZE/2}, ${playerp.y+TILE_SIZE/2})  Ball is over: ${s}`);
 	switch(s){
 		case 'OOB':
 		case 'tree':
