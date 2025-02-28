@@ -25,13 +25,13 @@ let layers = [];
 for(let i = 0;i<WIDTH*HEIGHT;i++){
 	let t = new Entity("Generic Tile");
 	ComponentFactory.createComponent("Sprite",t.id,"./Assets/tile.png");
-	ComponentFactory.createComponent("Position",t.id,TILE_SIZE*((i+1)%WIDTH),TILE_SIZE*Math.floor((i+1)/WIDTH));
+	ComponentFactory.createComponent("Position",t.id,TILE_SIZE*((i)%WIDTH+1),TILE_SIZE*Math.floor((i)/WIDTH+1));
 	layers[0]=ComponentFactory.createComponent("Layer",t.id, 0,context.canvas.width,context.canvas.height);
 }
 
 
 ComponentFactory.createComponent("Sprite",player.id,"./Assets/disc.png");
-ComponentFactory.createComponent("Position",player.id,10*32,15*32);
+ComponentFactory.createComponent("Position",player.id,10*TILE_SIZE,15*TILE_SIZE);
 layers[1]=ComponentFactory.createComponent("Layer",player.id,1,context.canvas.width,context.canvas.height);
 const p = Position.Positions[player.id];
 ComponentFactory.createComponent("Speed",player.id,30);
@@ -60,7 +60,7 @@ document.addEventListener(
 
 function PositionSpriteLayerFactory(x,y,sprite,layer){
 	let E = new Entity();
-	ComponentFactory.createComponent("Sprite",E.id,"./Assets/hoverbox.png");
+	ComponentFactory.createComponent("Sprite",E.id,sprite);
 	ComponentFactory.createComponent("Position",E.id,x,y);
 	let L = ComponentFactory.createComponent("Layer",E.id,layer,context.canvas.width,context.canvas.height);
 	layers[L.layer]=L;
