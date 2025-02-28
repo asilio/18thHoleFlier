@@ -34,7 +34,7 @@ ComponentFactory.createComponent("Sprite",player.id,"./Assets/disc.png");
 ComponentFactory.createComponent("Position",player.id,10*TILE_SIZE,15*TILE_SIZE);
 layers[1]=ComponentFactory.createComponent("Layer",player.id,1,context.canvas.width,context.canvas.height);
 const p = Position.Positions[player.id];
-ComponentFactory.createComponent("Speed",player.id,10);
+ComponentFactory.createComponent("Speed",player.id,1);
 
 //*** Keyboard Listener ***//
 document.addEventListener(
@@ -117,6 +117,7 @@ function getArcPosition(x1,y1,x2,y2,d,hyzer='left',t=0){
 	if(Math.abs(t0-tf)>Math.PI && tf>0) tf-=2*Math.PI;
 
 	//DEBUG
+	/*
 	//console.log(`t1: ${t1}, \nt2: ${t2}`);
 	//console.log(`dx: ${d*Math.cos(t1)}\ndy:${d*Math.sin(t1)}`);
 	//console.log(`t0: ${t0},\ntf: ${tf}\n|t0-tf|${Math.abs(t0-tf)}`);
@@ -128,6 +129,7 @@ function getArcPosition(x1,y1,x2,y2,d,hyzer='left',t=0){
 	mp.y = (y1+y2)/2;
 	cp.x = cx;
 	cp.y = cy;
+	*/
 	return [
 		cx-r*Math.cos(t0+t*(tf-t0)),
 		cy-r*Math.sin(t0+t*(tf-t0)),
@@ -177,7 +179,7 @@ function update(time_slice){
 	}
 	if(M<N){
 		let x, y, d;
-		[x, y, d] = getArcPosition(playerp.x,playerp.y,targetp.x,targetp.y,32*2,'right',dt*M);
+		[x, y, d] = getArcPosition(playerp.x,playerp.y,targetp.x,targetp.y,32*2,'right',M/N);
 		M+=1;
 		playerp.x = x;
 		playerp.y = y;
