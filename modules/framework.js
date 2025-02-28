@@ -77,6 +77,7 @@ class Line extends Component{
 	}
 
 	update(context){
+		console.log(this.p1);
 		context.moveTo(this.p1[0],this.p1[1]);
 		context.lineTo(this.p2[0],this.p2[1]);
 		context.stroke();
