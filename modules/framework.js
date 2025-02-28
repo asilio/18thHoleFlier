@@ -64,6 +64,25 @@ class Position extends Component{
 	
 }
 
+class Line extends Component{
+	static Lines = {};
+	static remove(eid){
+		delete Line.Lines[eid];
+	}
+
+	constructor(x1,y1,x2,y2,eid){
+		super();
+		this.p1 = [x1,y1];
+		this.p2 = [x2,y2];
+	}
+
+	update(context){
+		context.moveTo(this.p1[0],this.p1[1]);
+		context.lineTo(this.p2[0],this.p2[1]);
+		context.stroke();
+	}
+}
+
 class Sprite extends Component{
 	static Sprites = {};
 	static remove(eid){
@@ -136,4 +155,4 @@ class Layer extends Component{
 	}
 }
 
-export{Entity, ComponentFactory,Layer, Sprite, Position}
+export{Entity,Line, ComponentFactory,Layer, Sprite, Position}

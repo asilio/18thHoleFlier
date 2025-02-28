@@ -1,4 +1,4 @@
-import {Entity,Sprite, Layer, Position, ComponentFactory} from "./modules/framework.js";
+import {Entity,Sprite,Line, Layer, Position, ComponentFactory} from "./modules/framework.js";
 
 /*** Level Data ***/
 const context = document.getElementById("canvas").getContext('2d');
@@ -76,6 +76,7 @@ let midpoint = new Entity();
 ComponentFactory.createComponent("Sprite",midpoint.id,"./Assets/midpoint.png");
 ComponentFactory.createComponent("Position",midpoint.id,-100,0);
 ComponentFactory.createComponent("Layer",midpoint.id,1,context.canvas.width,context.canvas.height);
+let debug_line = new Line(0,0,10,10,player.id);
 
 context.canvas.addEventListener('mousemove',
 	(event)=>{
@@ -87,6 +88,9 @@ context.canvas.addEventListener('mousemove',
 		let p = Position.Positions[hover.id];
 		p.x=result[0];
 		p.y=result[1];
+
+		debug_line.p1 = [p.x,p.y];
+		debug_line.p2 = result;
 	});
 let playerPath = [];
 
@@ -123,7 +127,7 @@ function makeArc(x1,y1,x2,y2,d,dt=0.01){
 	//Path
 	let t = 0;
 	let path = [];
-	while(t<1){
+	while(t<=1){
 		path.push([
 			cx-r*Math.cos(t0+t*(t1-t0)),
 			cy-r*Math.sin(t0+t*(t1-t0)) 
@@ -151,7 +155,7 @@ function main(){
 
 	layers[0].update(context);
 	layers[1].update(context);
-
+	debug_line.update(context);
 	requestAnimationFrame(main);
 }
 
