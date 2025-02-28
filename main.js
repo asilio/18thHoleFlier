@@ -71,7 +71,7 @@ let target = PositionSpriteLayerFactory(-100,0,"./Assets/target.png", 1);
 let center = PositionSpriteLayerFactory(-100,0,"./Assets/center.png", 1);
 let midpoint = PositionSpriteLayerFactory(-100,0,"./Assets/midpoint.png", 1);
 let lefty = PositionSpriteLayerFactory(32,0,"./Assets/lefty.png", 2);
-console.log(layers);
+
 let distance = 0;
 /*** Mouse Events ***/
 context.canvas.addEventListener('mousemove',
@@ -174,13 +174,13 @@ function update(time_slice){
 		M = 0;
 	}
 	if(M<N){
-		let x, y;
-		[x, y, distance] = getArcPosition(playerp.x,playerp.y,targetp.x,targetp.y,32*2,'right',dt*M);
+		let x, y, d;
+		[x, y, d] = getArcPosition(playerp.x,playerp.y,targetp.x,targetp.y,32*2,'right',dt*M);
 		M+=1;
 		playerp.x = x;
 		playerp.y = y;
 	}
-	if(M>=N){
+	if(M>N){
 		travel_time = 0;
 		M = 0;
 		N = 0;
