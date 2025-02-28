@@ -145,25 +145,36 @@ context.canvas.addEventListener('mouseup',
 
 		let pp = Position.Positions[player.id];
 		let x, y;
-		let d = Math.floor(pp.distance(p)/TILE_SIZE);
-		let check = checkForeHand();
-		switch(check){
-			case 'backhand':
-				center_offset = 3*TILE_SIZE;
-			default:
-				center_offset = d*TILE_SIZE;		
-		}
-		
-		let string = checkHandedness();
-		[x,y,distance]=getArcPosition(pp.x,pp.y,p.x,p.y,center_offset,string,0);
+		distance_to_target = Math.floor(pp.distance(p)/TILE_SIZE);
+		[x,y,distance]=getArcPosition(pp.x,pp.y,p.x,p.y,checkForeHand(),checkHandedness(),0);
 	});
 
 
 
-function getArcPosition(x1,y1,x2,y2,d,hyzer='left',t=0){
-	let t1 = Math.atan2(y2-y1,x2-x1);
-	if(hyzer == 'right') t1 = Math.atan2(y1-y2,x1-x2);
-	console.log(hyzer);
+function getArcPosition(x1,y1,x2,y2,approach,hyzer='left',t=0){
+	let t1, d;
+	let flip = false;
+	switch(approach){
+		case 'forehand':
+			d = distance_to_target*TILE_SIZE;
+			flip = true;
+			break;
+		case 'backhand':
+		default:
+			d = 3*TILE_SIZE;
+	}
+	switch(hyzer){
+		case 'left':
+			if(flip) t1 = Math.atan2(y1-y2,x1-x2);
+			else t1 = Math.atan2(y2-y1,x2-x1);
+		case 'right':
+		default:
+			if(flip) t1 = Math.atan2(y2-y1,x2-x1);
+			else t1 = Math.atan2(y1-y2,x1-x2);
+	}
+	//t1 = Math.atan2(y2-y1,x2-x1);
+	//if(hyzer == 'right') t1 = Math.atan2(y1-y2,x1-x2);
+
 	let t2 = t1 + Math.PI/2;
 	let cx = (x1+x2)/2+d*Math.cos(t2);
 	let cy = (y1+y2)/2+d*Math.sin(t2);
@@ -229,7 +240,6 @@ let M = 0;
 let dt = 0;
 let sx = 0;
 let sy = 0;
-let center_offset = 0;
 
 function update(time_slice){
 	//console.log(distance, N, M, travel_time,dt);
@@ -243,7 +253,7 @@ function update(time_slice){
 	}
 	if(M<=N && distance>0){
 		let x, y, d;
-		[x, y, d] = getArcPosition(sx,sy,targetp.x,targetp.y,center_offset,checkHandedness(),M/N);
+		[x, y, d] = getArcPosition(sx,sy,targetp.x,targetp.y,checkForeHand(),checkHandedness(),M/N);
 		M+=1;
 		playerp.x = x;
 		playerp.y = y;
