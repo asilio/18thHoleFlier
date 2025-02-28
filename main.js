@@ -111,8 +111,8 @@ function makeArc(x1,y1,x2,y2,d,dt=0.01){
 	//DEBUG
 	console.log(`t1: ${t1}, \nt2: ${t2}`);
 	let cp = Position.Positions[center.id];
-	cp.x = (x1+x2)/2-16;
-	cp.y = (y1+y2)/2-16;
+	cp.x = (x1+x2)/2;
+	cp.y = (y1+y2)/2;
 	//Path
 	let t = 0;
 	let path = [];
