@@ -24,7 +24,13 @@ let layers = [];
 
 for(let i = 0;i<WIDTH*HEIGHT;i++){
 	let t = new Entity("Generic Tile");
-	ComponentFactory.createComponent("Sprite",t.id,"./Assets/tile.png");
+	if(Math.random()<0.5)
+		ComponentFactory.createComponent("Sprite",t.id,"./Assets/fair.png");
+	else if(Math.random()<0.5)
+		ComponentFactory.createComponent("Sprite",t.id,"./Assets/tree.png");
+	else
+		ComponentFactory.createComponent("Sprite",t.id,"./Assets/rough.png");
+	
 	ComponentFactory.createComponent("Position",t.id,TILE_SIZE*((i)%WIDTH+1),TILE_SIZE*Math.floor((i)/WIDTH+1));
 	layers[0]=ComponentFactory.createComponent("Layer",t.id, 0,context.canvas.width,context.canvas.height);
 }
