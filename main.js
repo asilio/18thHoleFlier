@@ -25,13 +25,13 @@ let layers = [];
 for(let i = 0;i<WIDTH*HEIGHT;i++){
 	let t = new Entity("Generic Tile");
 	ComponentFactory.createComponent("Sprite",t.id,"./Assets/tile.png");
-	ComponentFactory.createComponent("Position",t.id,TILE_SIZE*(i%WIDTH),TILE_SIZE*Math.floor(i/WIDTH));
+	ComponentFactory.createComponent("Position",t.id,TILE_SIZE*((i+1)%WIDTH),TILE_SIZE*Math.floor((i+1)/WIDTH));
 	layers[0]=ComponentFactory.createComponent("Layer",t.id, 0,context.canvas.width,context.canvas.height);
 }
 
 
 ComponentFactory.createComponent("Sprite",player.id,"./Assets/disc.png");
-ComponentFactory.createComponent("Position",player.id,0,0);
+ComponentFactory.createComponent("Position",player.id,10*32,15*32);
 layers[1]=ComponentFactory.createComponent("Layer",player.id,1,context.canvas.width,context.canvas.height);
 
 const p = Position.Positions[player.id];
@@ -60,7 +60,7 @@ document.addEventListener(
 /*** Mouse Events ***/
 let hover = new Entity();
 ComponentFactory.createComponent("Sprite",hover.id,"./Assets/hoverbox.png");
-ComponentFactory.createComponent("Position",hover.id,0,0);
+ComponentFactory.createComponent("Position",hover.id,-100,0);
 ComponentFactory.createComponent("Layer",hover.id,1,context.canvas.width,context.canvas.height);
 
 let target = new Entity();
@@ -72,11 +72,18 @@ let center = new Entity();
 ComponentFactory.createComponent("Sprite",center.id,"./Assets/center.png");
 ComponentFactory.createComponent("Position",center.id,-100,0);
 ComponentFactory.createComponent("Layer",center.id,1,context.canvas.width,context.canvas.height);
+
 let midpoint = new Entity();
 ComponentFactory.createComponent("Sprite",midpoint.id,"./Assets/midpoint.png");
 ComponentFactory.createComponent("Position",midpoint.id,-100,0);
 ComponentFactory.createComponent("Layer",midpoint.id,1,context.canvas.width,context.canvas.height);
-let debug_line = new Line(0,0,10,10,player.id);
+
+//let debug_line = new Line(0,0,10,10,player.id);
+
+let lefty = new Entity();
+ComponentFactory.createComponent("Sprite",lefty.id,"./Assets/lefty.png");
+ComponentFactory.createComponent("Position",lefty.id,32,0);
+layers[2] = ComponentFactory.createComponent("Layer",lefty.id,2,context.canvas.width,context.canvas.height);
 
 context.canvas.addEventListener('mousemove',
 	(event)=>{
@@ -89,8 +96,8 @@ context.canvas.addEventListener('mousemove',
 		p.x=result[0];
 		p.y=result[1];
 
-		debug_line.p1 = [p.x,p.y];
-		debug_line.p2 = result;
+		//debug_line.p1 = [p.x,p.y];
+		//debug_line.p2 = result;
 	});
 let playerPath = [];
 
@@ -117,13 +124,16 @@ function makeArc(x1,y1,x2,y2,d,hyzer='left',dt=0.01,){
 	let r  = Math.sqrt((cx-x1)*(cx-x1)+(cy-y1)*(cy-y1));
 	let t0 = Math.atan2(cy-y1,cx-x1);
 	let tf = Math.atan2(cy-y2,cx-x2);
+	//Ensure that the path remains on the hyzer side
+	if(Math.abs(t0-tf)>Math.PI && tf<0) tf+=2*Math.PI;
+	if(Math.abs(t0-tf)>Math.PI && tf>0) tf-=2*Math.PI;
+
 	//DEBUG
 	//console.log(`t1: ${t1}, \nt2: ${t2}`);
 	//console.log(`dx: ${d*Math.cos(t1)}\ndy:${d*Math.sin(t1)}`);
 	//console.log(`t0: ${t0},\ntf: ${tf}\n|t0-tf|${Math.abs(t0-tf)}`);
 	
-	if(Math.abs(t0-tf)>Math.PI && tf<0) tf+=2*Math.PI;
-	if(Math.abs(t0-tf)>Math.PI && tf>0) tf-=2*Math.PI;
+
 	let cp = Position.Positions[center.id];
 	let mp = Position.Positions[midpoint.id]
 	mp.x = (x1+x2)/2;
@@ -145,7 +155,10 @@ function makeArc(x1,y1,x2,y2,d,hyzer='left',dt=0.01,){
 	return path;
 }
 /*** Main Loop ***/
-layers[0].render();
+
+for(let i = 0;i<=layers.length;i++){
+	layers[i].render();
+}
 function main(){
 	context.clearRect(0,0,context.canvas.width,context.canvas.height);
 	let p = Position.Positions[player.id];
@@ -158,11 +171,16 @@ function main(){
 		let targetp = Position.Positions[target.id];
 		targetp.x =- 100;
 	}
-	layers[1].render();
 
-	layers[0].update(context);
-	layers[1].update(context);
-	debug_line.update(context);
+	for(let i = 1;i<=layers.length;i++){
+		//Skip the background layer render
+		layers[i].render();
+	}
+
+	for(let i = 0;i<=layers.length;i++){
+		layers[i].update(context);
+	}
+	//debug_line.update(context);
 	requestAnimationFrame(main);
 }
 
