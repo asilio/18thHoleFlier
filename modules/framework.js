@@ -27,8 +27,11 @@ class ComponentFactory{
 				return Sprite.Sprites[eid];
 			case 'layer':
 				let layer = args[0];
-				if(Layer.Layers[layer][eid] == undefined)
+				if(Layer.Layers[layer] == undefined)
 				{
+					let l = new Layer(...args);
+					Layer.Layers[layer][eid]=l;	
+				}else if(Layer.Layers[layer][eid]==undefined){
 					let l = new Layer(...args);
 					Layer.Layers[layer][eid]=l;	
 				}
