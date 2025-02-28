@@ -95,7 +95,7 @@ context.canvas.addEventListener('mouseup',
 		p.x=result[0];
 		p.y=result[1];
 		let pp = Position.Positions[player.id];
-		playerPath=makeArc(pp.x,pp.y,p.x,p.y,0.5);
+		playerPath=makeArc(pp.x,pp.y,p.x,p.y,32*2);
 	});
 
 
