@@ -2,7 +2,6 @@ import {Entity,Sprite, Layer, Position, ComponentFactory} from "./modules/framew
 
 /*** Level Data ***/
 const context = document.getElementById("canvas").getContext('2d');
-console.log(context.canvas.width);
 const TILE_SIZE = 32;
 const WIDTH = 10;
 const HEIGHT = 10;

@@ -106,11 +106,13 @@ class Layer extends Component{
 		return Layer.Layers[layer][eid];
 	}
 
-	constructor(layer){
+	constructor(layer,width,height){
 		super();
 		Layer.Layers[layer] = Layer.Layers[layer] || {};
 		this.layer  = layer;
 		this.canvas = document.createElement("canvas");
+		this.canvas.width=width;
+		this.canvas.height=height;
 		this.context = this.canvas.getContext("2d");
 		this.rendered = false;
 	}
