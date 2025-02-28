@@ -119,4 +119,4 @@ class Layer extends Component{
 	}
 }
 
-export{Entity, ComponentFactory, Sprite, Position}
+export{Entity, ComponentFactory,Layer, Sprite, Position}
