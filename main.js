@@ -256,7 +256,7 @@ let time_last_update=Date.now();
 let time_now;
 let delta_time;
 let time_accumulator=0;
-let time_slice = 0.01*1000;
+let time_slice = 0.005*1000;
 let N = 0;
 let M = 0;
 let dt = 0;
