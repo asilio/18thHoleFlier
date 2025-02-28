@@ -68,6 +68,7 @@ context.canvas.addEventListener('mousemove',
 		let cx = event.offsetX;
 		let cy = event.offsetY;
 		let result = canvas_pixel_to_tile_corner(cx,cy);
+		console.log(cx,cy,result)
 		let p = Position.Positions[hover.id];
 		p.x=result[0];
 		p.y=result[1];
