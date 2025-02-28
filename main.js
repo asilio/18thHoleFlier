@@ -332,7 +332,7 @@ function draw(){
 		layers[i].update(context);
 	}
 }
-
+let first_run = true;
 function main(){
 	time_now = Date.now();
 	delta_time = time_now - time_last_update;
@@ -344,8 +344,13 @@ function main(){
 		time_accumulator-=time_slice;
 	}	
 	draw();
+
 	if(M>0)
 		requestAnimationFrame(main);
+	if(first_run){
+		first_run = false;
+		requestAnimationFrame(main);
+	}
 }
 
 main();
