@@ -86,7 +86,7 @@ context.canvas.addEventListener('mouseup',
 		let result = canvas_pixel_to_tile_corner(cx,cy);
 		let p = Position.Positions[target.id];
 		p.x=result[0];
-		p.y=result[0];
+		p.y=result[1];
 	});
 /*** Main Loop ***/
 layers[0].render();
