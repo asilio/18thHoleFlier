@@ -2,6 +2,7 @@ class Isocube{
 	constructor(pos,sprite_file){
 		this.pos = pos;
 		this.change_sprite(sprite_file);
+		this.z = 0;
 	}
 
 	set_file_loaded(){
@@ -16,7 +17,7 @@ class Isocube{
 	}
 
 	draw(context){
-		context.drawImage(this.sprite,this.pos[0],this.pos[1]);
+		context.drawImage(this.sprite,this.pos[0],this.pos[1]-this.z);
 	}
 }
 
@@ -46,11 +47,11 @@ function ScreenToIsometricGrid(coordinates,width,height){
 	(1/width, 2/height)
 	(-1/width, 2/height)
 	*/
-	return [(coordinates[0]/width+2*coordinates[1]/height),(-coordinates[0]/width+2*coordinates[1]/height)];
+	return [Math.floor((coordinates[0]/width+2*coordinates[1]/height)),Math.floor((-coordinates[0]/width+2*coordinates[1]/height))];
 
 }
 
-
+const grid=[];
 function MakeCubes(cubes,iso=false){
 
 	let width = 32;
@@ -59,11 +60,14 @@ function MakeCubes(cubes,iso=false){
 	let rows = 30;
 	let cols = 40;
 	for(let i = 0;i <rows;i++){
+		grid[i]=[];
 		for(let j=0;j<cols;j++){
 			if(iso){
-				cubes.push(new Isocube( 
+				let cube = new Isocube( 
 					IsometricGridToScreen([(i%rows),(j%cols)],width,height),
-					"./Assets/isocube.png"));
+					"./Assets/isocube.png");
+				cubes.push(cube);
+				grid[i][j]=cube;
 			}
 			else{
 				cubes.push(new Isocube( 
@@ -75,15 +79,41 @@ function MakeCubes(cubes,iso=false){
 }
 
 const canvas = document.getElementById('canvas');
-const context = canvas.getContext('2d');	
+const context = canvas.getContext('2d');
+let last_clicked =undefined;
 const cubes = [];
 MakeCubes(cubes,true);
+
+document.addEventListener("click",(event)=>
+{
+	console.log(event.clientX,event.clientY);
+	let i,j;
+	[i, j] = ScreenToIsometricGrid([event.clientX-640/2,event.clientY],32,32);
+	try{
+		if(last_clicked == undefined){
+		}else{
+			last_clicked.change_sprite("./Assets/isocube.png");
+			last_clicked.z = 0;
+		}
+		last_clicked = grid[i-1][j];
+		last_clicked.change_sprite("./Assets/hovercube.png");
+
+	}catch(err){return}
+});
 
 function LevelOne(){
 	context.clearRect(0,0,context.canvas.width,context.canvas.height)
 	for(let i = 0;i<cubes.length;i++)
 	{
 		cubes[i].draw(context);
+		//cubes[i].z+=2*Math.sin(Date.now()*Math.PI/1000-i*Math.PI/4-(i%40)*Math.PI/6);
+	}
+	if(last_clicked ==undefined){}
+	else{
+		console.log(last_clicked.z)
+		if(last_clicked.z<10){
+			last_clicked.z+=0.01;
+		}
 	}
 	
 	requestAnimationFrame(LevelOne);
