@@ -83,7 +83,7 @@ const context = canvas.getContext('2d');
 let last_clicked =undefined;
 const cubes = [];
 MakeCubes(cubes,true);
-const bob = new Isocube(IsometricGridToScreen([5,5],32,32),"./Assets/bobcube.png");
+const bob = new Isocube(IsometricGridToScreen([5,5],32,32),"./Assets/isodisc.png");
 
 
 document.addEventListener("click",(event)=>
