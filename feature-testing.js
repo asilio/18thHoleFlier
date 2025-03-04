@@ -21,6 +21,13 @@ class Isocube{
 	}
 }
 
+function IsometricGridRotationToScreen(coordinates,rotation,width,height){
+	/*
+	(width/2*cos(rotation), -sin(rotation))
+	(height/4*sin(rotation), cos(rotation))
+	*/
+}
+
 function IsometricGridToScreen(coordinates,width,height){
 	/*
 	(width/2, -width/2)
@@ -47,7 +54,7 @@ function ScreenToIsometricGrid(coordinates,width,height){
 	(1/width, 2/height)
 	(-1/width, 2/height)
 	*/
-	return [Math.floor((coordinates[0]/width+2*coordinates[1]/height)),Math.floor((-coordinates[0]/width+2*coordinates[1]/height))];
+	return [Math.floor((coordinates[0]/width+2*coordinates[1]/height))-1,Math.floor((-coordinates[0]/width+2*coordinates[1]/height))];
 
 }
 
@@ -88,27 +95,41 @@ const bob = new Isocube(IsometricGridToScreen([5,5],32,32),"./Assets/isodisc.png
 
 document.addEventListener("click",(event)=>
 {
-	console.log(event.clientX,event.clientY);
+	//console.log(event.clientX,event.clientY);
 	let i,j;
 	[i, j] = ScreenToIsometricGrid([event.clientX-640/2,event.clientY],32,32);
-	console.log(i-1,j);
+	console.log(i,j);
 	let x,y;
 	[x,y] = IsometricGridToScreen([i,j],32,32);
-	console.log(x,y);
+	//console.log(x,y);
 	let [p, q] = ScreenToIsometricGrid([x-640/2,y],32,32);
-	console.log(p-1,q);
+	//console.log(p-1,q);
 	[p, q] = ScreenToIsometricGrid([bob.pos[0]-640/2, bob.pos[1]],32,32);
-	console.log("Bob: ", p, q);
+	//console.log("Bob: ", p, q);
 	try{
 		if(last_clicked == undefined){
 		}else{
 			last_clicked.change_sprite("./Assets/isocube.png");
 			last_clicked.z = 0;
 		}
-		last_clicked = grid[i-1][j];
+		last_clicked = grid[i][j];
 		last_clicked.change_sprite("./Assets/hovercube.png");
 
 	}catch(err){return}
+});
+const canvas2 = document.getElementById('canvas2');
+const context2 =canvas2.getContext('2d');
+context2.font = "48px serif";
+context2.fillText("Hello world", 10, 50);
+
+document.addEventListener('mousemove',(event)=>
+{
+	if(event.target == canvas){
+		let i,j;
+		[i, j] = ScreenToIsometricGrid([event.clientX-640/2,event.clientY],32,32);
+		context2.clearRect(0,0,context2.canvas.width,context2.canvas.height)
+		context2.fillText(`(${i},${j})`,10,50);
+	}
 });
 
 function LevelOne(){
