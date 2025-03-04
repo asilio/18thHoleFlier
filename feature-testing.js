@@ -105,7 +105,7 @@ document.addEventListener("click",(event)=>
 	let [p, q] = ScreenToIsometricGrid([x-640/2,y],32,32);
 	//console.log(p-1,q);
 	[p, q] = ScreenToIsometricGrid([bob.pos[0]-640/2, bob.pos[1]],32,32);
-	//console.log("Bob: ", p, q);
+	console.log("Bob: ", p, q);
 	try{
 		if(last_clicked == undefined){
 		}else{
