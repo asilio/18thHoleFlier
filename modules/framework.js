@@ -1,3 +1,5 @@
+const ECS = {};
+
 class Entity{
 	static ID_COUNTER = -1;
 	static Entities=[];

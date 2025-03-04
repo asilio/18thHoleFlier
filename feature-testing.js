@@ -83,6 +83,8 @@ const context = canvas.getContext('2d');
 let last_clicked =undefined;
 const cubes = [];
 MakeCubes(cubes,true);
+const bob = new Isocube(IsometricGridToScreen([5,5],32,32),"./Assets/bobcube.png");
+
 
 document.addEventListener("click",(event)=>
 {
@@ -110,13 +112,15 @@ function LevelOne(){
 	}
 	if(last_clicked ==undefined){}
 	else{
-		console.log(last_clicked.z)
 		if(last_clicked.z<10){
-			last_clicked.z+=0.01;
+			last_clicked.z+=0.1;
 		}
 	}
-	
+	let i,j;
+	[i,j] = ScreenToIsometricGrid([bob.pos[0]-640/2, bob.pos[1]],32,32);
+	bob.z = grid[i][j].z;
+	bob.draw(context);
 	requestAnimationFrame(LevelOne);
 }
-
+console.log(bob);
 LevelOne();
