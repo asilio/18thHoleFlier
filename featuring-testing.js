@@ -25,7 +25,7 @@ function RectilinearToIsometricCoordinates(coordinates,width,height){
 }
 
 
-function MakeCubes(){
+function MakeCubes(cubes,iso=false){
 
 	let width = 32;
 	let height = 32;
@@ -34,22 +34,40 @@ function MakeCubes(){
 	let cols = 40;
 	for(let i = 0;i <rows;i++){
 		for(let j=0;j<cols;j++){
-			cubes.push(new Isocube( [(i%rows)*width,(j%cols)*height],"./Assets/isocube.png"));
+			if(iso){
+				cubes.push(new Isocube( 
+					RectilinearToIsometricCoordinates([(i%rows)*width,(j%cols)*height],width,height),
+					"./Assets/isocube.png"));
+			}
+			else{
+				cubes.push(new Isocube( 
+					[(i%rows)*width,(j%cols)*height],
+					"./Assets/isocube.png"));
+			}
 		}
 	}
 }
 
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');	
-const cubes = [];
-
+const canvas2 = document.getElementById('canvas2');
+const context2 = canvas2.getContext('2d');
+const cubes1 = [];
+const cubes2 = [];
+MakeCubes(cubes1);
+MakeCubes(cubes2)
 function LevelOne(){
 	context.clearRect(0,0,context.canvas.width,context.canvas.height)
-	for(let i = 0;i<cubes.length;i++)
+	context2.clearRect(0,0,context2.canvas.width,context2.canvas.height)
+	for(let i = 0;i<cubes1.length;i++)
 	{
-		cubes[i].draw(context);
+		cubes1[i].draw(context);
+	}
+	for(let i = 0;i<cubes2.length;i++)
+	{
+		cubes2[i].draw(context2);
 	}
 	requestAnimationFrame(LevelOne);
 }
-MakeCubes();
+
 LevelOne();
