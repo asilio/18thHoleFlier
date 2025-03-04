@@ -20,8 +20,34 @@ class Isocube{
 	}
 }
 
-function RectilinearToIsometricCoordinates(coordinates,width,height){
-	return [(coordinates[0]-coordinates[1])*width/2+1280/2,(coordinates[0]+coordinates[1])*height/4];
+function IsometricGridToScreen(coordinates,width,height){
+	/*
+	(width/2, -width/2)
+	(height/4, height/4)
+	*/
+	return [(coordinates[0]-coordinates[1])*width/2+640/2,(coordinates[0]+coordinates[1])*height/4];
+}
+
+function ScreenToIsometricGrid(coordinates,width,height){
+	/*
+	(d -b)
+	(-c a)
+	* 1/(ad - bc)
+
+	1/(width/2*height/4 - (-width/2)*height/4)
+	=1/(width*height/8+width*height/8)
+	=1/(width*height/4)
+	=4/(width*height)
+
+	4/(width*height) * (height/4  width/2)
+	                   (-height/4  width/2)
+
+
+	(1/width, 2/height)
+	(-1/width, 2/height)
+	*/
+	return [(coordinates[0]/width+2*coordinates[1]/height),(-coordinates[0]/width+2*coordinates[1]/height)];
+
 }
 
 
@@ -36,7 +62,7 @@ function MakeCubes(cubes,iso=false){
 		for(let j=0;j<cols;j++){
 			if(iso){
 				cubes.push(new Isocube( 
-					RectilinearToIsometricCoordinates([(i%rows)*width,(j%cols)*height],width,height),
+					IsometricGridToScreen([(i%rows),(j%cols)],width,height),
 					"./Assets/isocube.png"));
 			}
 			else{
@@ -50,23 +76,16 @@ function MakeCubes(cubes,iso=false){
 
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');	
-const canvas2 = document.getElementById('canvas2');
-const context2 = canvas2.getContext('2d');
-const cubes1 = [];
-const cubes2 = [];
-MakeCubes(cubes1);
-MakeCubes(cubes2)
+const cubes = [];
+MakeCubes(cubes,true);
+
 function LevelOne(){
 	context.clearRect(0,0,context.canvas.width,context.canvas.height)
-	context2.clearRect(0,0,context2.canvas.width,context2.canvas.height)
-	for(let i = 0;i<cubes1.length;i++)
+	for(let i = 0;i<cubes.length;i++)
 	{
-		cubes1[i].draw(context);
+		cubes[i].draw(context);
 	}
-	for(let i = 0;i<cubes2.length;i++)
-	{
-		cubes2[i].draw(context2);
-	}
+	
 	requestAnimationFrame(LevelOne);
 }
 
