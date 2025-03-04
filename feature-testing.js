@@ -91,6 +91,14 @@ document.addEventListener("click",(event)=>
 	console.log(event.clientX,event.clientY);
 	let i,j;
 	[i, j] = ScreenToIsometricGrid([event.clientX-640/2,event.clientY],32,32);
+	console.log(i-1,j);
+	let x,y;
+	[x,y] = IsometricGridToScreen([i,j],32,32);
+	console.log(x,y);
+	let [p, q] = ScreenToIsometricGrid([x-640/2,y],32,32);
+	console.log(p-1,q);
+	[p, q] = ScreenToIsometricGrid([bob.pos[0]-640/2, bob.pos[1]],32,32);
+	console.log("Bob: ", p, q);
 	try{
 		if(last_clicked == undefined){
 		}else{
@@ -118,6 +126,7 @@ function LevelOne(){
 	}
 	let i,j;
 	[i,j] = ScreenToIsometricGrid([bob.pos[0]-640/2, bob.pos[1]],32,32);
+	//console.log(i,j);
 	bob.z = grid[i][j].z;
 	bob.draw(context);
 	requestAnimationFrame(LevelOne);
