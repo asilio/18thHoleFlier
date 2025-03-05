@@ -54,7 +54,7 @@ function ScreenToIsometricGrid(coordinates,width,height){
 	(1/width, 2/height)
 	(-1/width, 2/height)
 	*/
-	return [Math.floor((coordinates[0]/width+2*coordinates[1]/height)+.01)-1,Math.floor((-coordinates[0]/width+2*coordinates[1]/height))];
+	return [Math.floor((coordinates[0]/width+2*coordinates[1]/height)),Math.floor((-coordinates[0]/width+2*coordinates[1]/height))];
 
 }
 
