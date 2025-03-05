@@ -54,7 +54,8 @@ function ScreenToIsometricGrid(coordinates,width,height){
 	(1/width, 2/height)
 	(-1/width, 2/height)
 	*/
-	return [Math.floor((coordinates[0]/width+2*coordinates[1]/height)),Math.floor((-coordinates[0]/width+2*coordinates[1]/height))];
+	let x = coordinates[0]-canvas.width/2;
+	return [Math.floor((x/width+2*coordinates[1]/height)),Math.floor((-x/width+2*coordinates[1]/height))];
 
 }
 
@@ -97,7 +98,7 @@ document.addEventListener("click",(event)=>
 {
 	//console.log(event.clientX,event.clientY);
 	let i,j;
-	[i, j] = ScreenToIsometricGrid([event.clientX-canvas.width/2,event.clientY],32,32);
+	[i, j] = ScreenToIsometricGrid([event.clientX,event.clientY],32,32);
 	//console.log(i,j);
 	//let x,y;
 	//[x,y] = IsometricGridToScreen([i,j],32,32);
@@ -149,7 +150,7 @@ function LevelOne(){
 		}
 	}
 	let i,j;
-	[i,j] = ScreenToIsometricGrid([bob.pos[0]-canvas.width/2, bob.pos[1]],32,32);
+	[i,j] = ScreenToIsometricGrid([bob.pos[0], bob.pos[1]],32,32);
 	//console.log(i,j);
 	bob.z = grid[i][j].z;
 	bob.draw(context);
