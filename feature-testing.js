@@ -124,7 +124,7 @@ const canvas2 = document.getElementById('canvas2');
 const context2 =canvas2.getContext('2d');
 context2.font = "48px serif";
 context2.fillText("Hello world", 10, 50);
-
+/*
 document.addEventListener('mousemove',(event)=>
 {
 	if(event.target == canvas){
@@ -144,7 +144,7 @@ document.addEventListener('mousemove',(event)=>
 		context.lineTo(x-Math.sqrt(3)*8,y+8);
 		context.lineTo(x,y);
 		context.stroke();
-		context.closePath();/*
+		context.closePath();
 		let x1,y1,x2,y2,x3,y3,x4,y4;
 		x1=x;
 		x2 = Math.round((x+Math.sqrt(3)*8)*100,2)/100;
@@ -156,10 +156,10 @@ document.addEventListener('mousemove',(event)=>
 		y4 = y;
 		context2.fillText(`BoundingBox: `,10,2000);
 		context2.fillText(` [(${x1},${y1});(${x2},${y2})`,10,250);
-		context2.fillText(`  (${x3},${y3});(${x4},${y4})]`,10,300);*/
+		context2.fillText(`  (${x3},${y3});(${x4},${y4})]`,10,300);
 	}
 });
-
+*/
 function LevelOne(){
 	context.clearRect(0,0,context.canvas.width,context.canvas.height)
 	for(let i = 0;i<cubes.length;i++)

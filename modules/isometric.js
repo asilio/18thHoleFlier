@@ -24,7 +24,7 @@ function draw_line(context,x1,y1,x2,y2){
 	context.closePath();
 }
 function draw_isoplane_at_angle(context, angle, center_x = 0,center_y = 0, horizontal_length=10, vertical_length=10, unit_length=64){
-	context.clearRect(0,0,context.canvas.width,context.canvas.height);
+	//context.clearRect(0,0,context.canvas.width,context.canvas.height);
 	let bottom_middle = isoplanar_point_to_screen_at_angle([horizontal_length,vertical_length],angle,center_x,center_y,unit_length);
 	for(let x_hat = 0;x_hat<=horizontal_length;x_hat++){
 		let root =isoplanar_point_to_screen_at_angle([x_hat,0],angle,center_x,center_y,unit_length);
