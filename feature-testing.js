@@ -33,7 +33,7 @@ function IsometricGridToScreen(coordinates,width,height){
 	(width/2, -width/2)
 	(height/4, height/4)
 	*/
-	return [(coordinates[0]-coordinates[1])*width/2+640/2,(coordinates[0]+coordinates[1])*height/4];
+	return [(coordinates[0]-coordinates[1])*width/2+canvas.width/2,(coordinates[0]+coordinates[1])*height/4];
 }
 
 function ScreenToIsometricGrid(coordinates,width,height){
@@ -97,22 +97,22 @@ document.addEventListener("click",(event)=>
 {
 	//console.log(event.clientX,event.clientY);
 	let i,j;
-	[i, j] = ScreenToIsometricGrid([event.clientX-640/2,event.clientY],32,32);
-	console.log(i,j);
-	let x,y;
-	[x,y] = IsometricGridToScreen([i,j],32,32);
+	[i, j] = ScreenToIsometricGrid([event.clientX-canvas.width/2,event.clientY],32,32);
+	//console.log(i,j);
+	//let x,y;
+	//[x,y] = IsometricGridToScreen([i,j],32,32);
 	//console.log(x,y);
-	let [p, q] = ScreenToIsometricGrid([x-640/2,y],32,32);
+	//let [p, q] = ScreenToIsometricGrid([x-640/2,y],32,32);
 	//console.log(p-1,q);
-	[p, q] = ScreenToIsometricGrid([bob.pos[0]-640/2, bob.pos[1]],32,32);
-	console.log("Bob: ", p, q);
+	//[p, q] = ScreenToIsometricGrid([bob.pos[0]-640/2, bob.pos[1]],32,32);
+	//console.log("Bob: ", p, q);
 	try{
 		if(last_clicked == undefined){
 		}else{
 			last_clicked.change_sprite("./Assets/isocube.png");
 			last_clicked.z = 0;
 		}
-		last_clicked = grid[i][j];
+		last_clicked = grid[i-1][j];
 		last_clicked.change_sprite("./Assets/hovercube.png");
 
 	}catch(err){return}
@@ -125,10 +125,13 @@ context2.fillText("Hello world", 10, 50);
 document.addEventListener('mousemove',(event)=>
 {
 	if(event.target == canvas){
-		let i,j;
-		[i, j] = ScreenToIsometricGrid([event.clientX-640/2,event.clientY],32,32);
+		let i,j, x, y;
+		[i, j] = ScreenToIsometricGrid([event.clientX-canvas.width/2,event.clientY],32,32);
+		[x,y]  = IsometricGridToScreen([i,j],32,32);
 		context2.clearRect(0,0,context2.canvas.width,context2.canvas.height)
 		context2.fillText(`(${i},${j})`,10,50);
+		context2.fillText(`(${event.clientX-canvas.width/2},${event.clientY})`,10,100);
+		context2.fillText(`(${x},${y})`,10,150);
 	}
 });
 
@@ -146,7 +149,7 @@ function LevelOne(){
 		}
 	}
 	let i,j;
-	[i,j] = ScreenToIsometricGrid([bob.pos[0]-640/2, bob.pos[1]],32,32);
+	[i,j] = ScreenToIsometricGrid([bob.pos[0]-canvas.width/2, bob.pos[1]],32,32);
 	//console.log(i,j);
 	bob.z = grid[i][j].z;
 	bob.draw(context);
