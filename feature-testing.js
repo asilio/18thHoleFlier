@@ -135,12 +135,14 @@ document.addEventListener('mousemove',(event)=>
 		context2.fillText(`Mouse x,y: (${event.clientX},${event.clientY})`,10,100);
 		context2.fillText(`x,y from iso: (${x},${y})`,10,150);
 		context.strokeStyle="#ff0039";
+		context.beginPath();
 		context.moveTo(x,y);
 		context.lineTo(x+Math.sqrt(3)*8,y+8);
 		context.lineTo(x,y+16);
 		context.lineTo(x-Math.sqrt(3)*8,y+8);
 		context.lineTo(x,y);
 		context.stroke();
+		context.endPath();
 		let x1,y1,x2,y2,x3,y3,x4,y4;
 		x1=x;
 		x2 = Math.round((x+Math.sqrt(3)*8)*100,2)/100;
