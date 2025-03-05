@@ -1,3 +1,5 @@
+import {draw_isoplane_at_angle} from "./modules/isometric.js";
+
 class Isocube{
 	constructor(pos,sprite_file){
 		this.pos = pos;
@@ -130,10 +132,10 @@ document.addEventListener('mousemove',(event)=>
 		[i, j] = ScreenToIsometricGrid([event.clientX,event.clientY],32,32);
 		[x,y]  = IsometricGridToScreen([i,j],32,32);
 		y=y-8;
-		context2.clearRect(0,0,context2.canvas.width,context2.canvas.height)
-		context2.fillText(`Iso from Mouse: (${i},${j})`,10,50);
-		context2.fillText(`Mouse x,y: (${event.clientX},${event.clientY})`,10,100);
-		context2.fillText(`x,y from iso: (${x},${y})`,10,150);
+		//context2.clearRect(0,0,context2.canvas.width,context2.canvas.height)
+		//context2.fillText(`Iso from Mouse: (${i},${j})`,10,50);
+		//context2.fillText(`Mouse x,y: (${event.clientX},${event.clientY})`,10,100);
+		//context2.fillText(`x,y from iso: (${x},${y})`,10,150);
 		context.strokeStyle="#ff0039";
 		context.beginPath();
 		context.moveTo(x,y);
@@ -142,7 +144,7 @@ document.addEventListener('mousemove',(event)=>
 		context.lineTo(x-Math.sqrt(3)*8,y+8);
 		context.lineTo(x,y);
 		context.stroke();
-		context.endPath();
+		context.endPath();/*
 		let x1,y1,x2,y2,x3,y3,x4,y4;
 		x1=x;
 		x2 = Math.round((x+Math.sqrt(3)*8)*100,2)/100;
@@ -154,7 +156,7 @@ document.addEventListener('mousemove',(event)=>
 		y4 = y;
 		context2.fillText(`BoundingBox: `,10,2000);
 		context2.fillText(` [(${x1},${y1});(${x2},${y2})`,10,250);
-		context2.fillText(`  (${x3},${y3});(${x4},${y4})]`,10,300);
+		context2.fillText(`  (${x3},${y3});(${x4},${y4})]`,10,300);*/
 	}
 });
 
@@ -183,14 +185,8 @@ function LevelOne(){
 	[x3, y3] = IsometricGridToScreen([8,11],32,32);
 	[x4, y4] = IsometricGridToScreen([7,11],32,32);
 
-	let ctx = context;
-	ctx.strokeStyle = "#ff0039";
-	ctx.moveTo(x1,y1);
-	ctx.lineTo(x2,y2);
-	ctx.lineTo(x3,y3);
-	ctx.lineTo(x4,y4);
-	ctx.lineTo(x1,y1);
-	ctx.stroke();
-
 	requestAnimationFrame(LevelOne);
 }
+
+LevelOne();
+draw_isoplane_at_angle(context2,Math.PI/6,canvas2.width/2,0,10,10,16);
