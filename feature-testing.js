@@ -126,11 +126,11 @@ document.addEventListener('mousemove',(event)=>
 {
 	if(event.target == canvas){
 		let i,j, x, y;
-		[i, j] = ScreenToIsometricGrid([event.clientX-canvas.width/2,event.clientY],32,32);
+		[i, j] = ScreenToIsometricGrid([event.clientX,event.clientY],32,32);
 		[x,y]  = IsometricGridToScreen([i,j],32,32);
 		context2.clearRect(0,0,context2.canvas.width,context2.canvas.height)
 		context2.fillText(`Iso from Mouse: (${i},${j})`,10,50);
-		context2.fillText(`Mouse x,y: (${event.clientX-canvas.width/2},${event.clientY})`,10,100);
+		context2.fillText(`Mouse x,y: (${event.clientX},${event.clientY})`,10,100);
 		context2.fillText(`x,y from iso: (${x},${y})`,10,150);
 	}
 });
