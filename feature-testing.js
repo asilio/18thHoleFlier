@@ -178,7 +178,7 @@ function LevelOne(){
 	//console.log(i,j);
 	bob.z = grid[i][j].z;
 	bob.draw(context);
-
+	draw_isoplane_at_angle(context,Math.PI/6,canvas.width/2,0,30,40,16);
 	let x1, y1, x2, y2, x3, y3, x4, y4;
 	[x1, y1] = IsometricGridToScreen([7,10],32,32);
 	[x2, y2] = IsometricGridToScreen([8,10],32,32);
@@ -189,4 +189,4 @@ function LevelOne(){
 }
 
 LevelOne();
-draw_isoplane_at_angle(context2,Math.PI/6,canvas2.width/2,0,10,10,16);
+draw_isoplane_at_angle(context2,Math.PI/6,canvas2.width/2,0,30,40,16);
