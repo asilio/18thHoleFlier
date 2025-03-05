@@ -141,7 +141,7 @@ function LevelOne(){
 	}
 	if(last_clicked ==undefined){}
 	else{
-		if(last_clicked.z<10){
+		if(last_clicked.z<26){
 			last_clicked.z+=0.1;
 		}
 	}
