@@ -158,8 +158,8 @@ function LevelOne(){
 	let x1, y1, x2, y2, x3, y3, x4, y4;
 	[x1, y1] = IsometricGridToScreen([7,10],32,32);
 	[x2, y2] = IsometricGridToScreen([8,10],32,32);
-	[x1, y1] = IsometricGridToScreen([8,11],32,32);
-	[x1, y1] = IsometricGridToScreen([7,11],32,32);
+	[x3, y3] = IsometricGridToScreen([8,11],32,32);
+	[x4, y4] = IsometricGridToScreen([7,11],32,32);
 
 	let ctx = context;
 	ctx.strokeStyle = "#ff0039";
