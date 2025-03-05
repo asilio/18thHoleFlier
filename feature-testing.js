@@ -35,7 +35,7 @@ function IsometricGridToScreen(coordinates,width,height){
 	(width/2, -width/2)
 	(height/4, height/4)
 	*/
-	return [(coordinates[0]-coordinates[1])*width/2+canvas.width/2,(coordinates[0]+coordinates[1])*height/4];
+	return [(coordinates[0]-coordinates[1])*width/2+canvas.width/2-width/2,(coordinates[0]+coordinates[1])*height/4];
 }
 
 function ScreenToIsometricGrid(coordinates,width,height){
@@ -56,7 +56,7 @@ function ScreenToIsometricGrid(coordinates,width,height){
 	(1/width, 2/height)
 	(-1/width, 2/height)
 	*/
-	let x = coordinates[0]-canvas.width/2;
+	let x = coordinates[0]-canvas.width/2+width/2;
 	return [Math.floor((x/width+2*coordinates[1]/height)),Math.floor((-x/width+2*coordinates[1]/height))];
 
 }
