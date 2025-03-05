@@ -55,8 +55,11 @@ function draw_isoplane_at_angle(context, angle, center_x = 0,center_y = 0, horiz
 		}
 	}
 }
-
+/*
 const canvas = document.getElementById('canvas2');
 const context = canvas.getContext('2d');
 
 draw_isoplane_at_angle(context,PI/6,canvas.width/2,0,10,10,32)
+*/
+
+export {draw_isoplane_at_angle};

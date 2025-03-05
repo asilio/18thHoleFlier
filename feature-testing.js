@@ -144,7 +144,7 @@ document.addEventListener('mousemove',(event)=>
 		context.lineTo(x-Math.sqrt(3)*8,y+8);
 		context.lineTo(x,y);
 		context.stroke();
-		context.endPath();/*
+		context.closePath();/*
 		let x1,y1,x2,y2,x3,y3,x4,y4;
 		x1=x;
 		x2 = Math.round((x+Math.sqrt(3)*8)*100,2)/100;
