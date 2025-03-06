@@ -20,8 +20,8 @@ function isoplanar_point_to_screen_at_angle(point,angle,center_x=0,center_y=0,ho
 function isoplanar_point_to_screen_90_degree_rotation_of_grid(point,angle, center_x=0, center_y=0, horizontal_length=10, vertical_length=10, unit_length = 64){
 	//point is relative to the un-rotated grid, not the screen
 	let pointA = [
-		-point[1] + unit_length*(vertical_length+horizontal_length)/2,
-		point[0] + unit_length*(vertical_length-horizontal_length)/2
+		-point[1] + (vertical_length+horizontal_length)/2,
+		point[0] + (vertical_length-horizontal_length)/2
 		];
 	console.log(pointA);
 	return isoplanar_point_to_screen_at_angle(pointA, angle, center_x, center_y, unit_length);
