@@ -23,7 +23,7 @@ function isoplanar_point_to_screen_90_degree_rotation_of_grid(point,angle, cente
 		-point[1] + unit_length*(vertical_length+horizontal_length)/2,
 		point[0] + unit_length*(vertical_length-horizontal_length)/2
 		];
-
+	console.log(pointA);
 	return isoplanar_point_to_screen_at_angle(pointA, angle, center_x, center_y, unit_length);
 }
 
