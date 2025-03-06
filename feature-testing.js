@@ -189,4 +189,4 @@ function LevelOne(){
 }
 
 LevelOne();
-draw_isoplane_at_angle(context2,Math.PI/6,canvas2.width/2,0,30,40,16);
+draw_isoplane_at_angle(context2,Math.PI/6,canvas2.width/2,0,30,30,16);
